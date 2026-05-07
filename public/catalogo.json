@@ -21,36 +21,6 @@
   },
   {
     "id": 3,
-    "nombre": "Enchapes y pisos",
-    "categoria": "Acabados",
-    "descripcion": "Colocación de cerámica, porcelanato y azulejo. Baños, cocinas, terrazas y fachadas.",
-    "antes": null,
-    "durante": null,
-    "despues": null,
-    "destacado": false
-  },
-  {
-    "id": 4,
-    "nombre": "Pintura interior y exterior",
-    "categoria": "Acabados",
-    "descripcion": "Preparación de superficies, sellado y pintura profesional. Casas, bodegas y locales comerciales.",
-    "antes": null,
-    "durante": null,
-    "despues": null,
-    "destacado": false
-  },
-  {
-    "id": 5,
-    "nombre": "Electricidad",
-    "categoria": "Otros",
-    "descripcion": "Instalaciones eléctricas residenciales y comerciales. Tableros, tomacorrientes, iluminación.",
-    "antes": null,
-    "durante": null,
-    "despues": null,
-    "destacado": false
-  },
-  {
-    "id": 6,
     "nombre": "Remodelación general",
     "categoria": "Remodelación",
     "descripcion": "Transformamos su espacio de principio a fin. Demolición, construcción, acabados y limpieza final.",
