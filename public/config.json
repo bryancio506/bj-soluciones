@@ -1,0 +1,21 @@
+{
+  "nombre": "BJ Soluciones",
+  "slogan": "Construcción · Remodelación · Acabados",
+  "logo": "",
+  "colores": {
+    "primary": "#1A1A1A",
+    "accent": "#D72B2B",
+    "bg": "#F2F0ED"
+  },
+  "fuentes": {
+    "head": "Syne",
+    "body": "DM Sans"
+  },
+  "contacto": {
+    "whatsapp": "50660040817",
+    "email": "carvabyron8@gmail.com",
+    "ubicacion": "Costa Rica",
+    "horario": "Lun–Sáb 7am–5pm"
+  },
+  "categorias": ["Todos", "Construcción", "Remodelación", "Acabados", "Otros"]
+}
