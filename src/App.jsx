@@ -364,6 +364,7 @@ export default function App() {
           maxWidth: 1100, margin: "0 auto", position: "relative",
           borderRadius: 18, overflow: "hidden", aspectRatio: "16/9", minHeight: 360,
           background: "#0A0A0A", boxShadow: "0 18px 40px rgba(0,0,0,0.28)",
+          isolation: "isolate", contain: "paint", transform: "translateZ(0)", WebkitTransform: "translateZ(0)",
         }}>
           <video
             src="/proyectos/escalera.mp4"
