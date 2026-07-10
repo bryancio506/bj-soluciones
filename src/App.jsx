@@ -92,7 +92,7 @@ const ToolsBg = () => (
 )
 
 // Carrusel simple de fotos del proyecto estrella
-function HeroCarousel({ imagenes, accent }) {
+function HeroCarousel({ imagenes, accent, nombre }) {
   const [idx, setIdx] = useState(0)
   const [animDir, setAnimDir] = useState(null)
   const timer = useRef(null)
@@ -122,7 +122,7 @@ function HeroCarousel({ imagenes, accent }) {
 
   return (
     <div style={{ position:"relative", borderRadius:16, overflow:"hidden", aspectRatio:"16/10", flex:"0 0 340px", maxWidth:380, boxShadow:"0 20px 60px rgba(0,0,0,0.5)" }}>
-      <img src={imagenes[idx]} alt={labels[idx]}
+      <img src={imagenes[idx]} alt={`${nombre} — ${labels[idx]}`}
         style={{
           width:"100%", height:"100%", objectFit:"cover",
           transition: "opacity 0.22s ease",
@@ -345,7 +345,7 @@ export default function App() {
 
           {/* Carrusel */}
           {heroImgs.length > 0 && (
-            <HeroCarousel imagenes={heroImgs} accent={config.colores.accent} />
+            <HeroCarousel imagenes={heroImgs} accent={config.colores.accent} nombre={destacado.nombre} />
           )}
         </div>
       </section>
@@ -354,17 +354,18 @@ export default function App() {
       <section style={{ padding: "2.5rem 2rem 0" }}>
         <div style={{
           maxWidth: 1100, margin: "0 auto", position: "relative",
-          borderRadius: 18, overflow: "hidden", aspectRatio: "16/9",
+          borderRadius: 18, overflow: "hidden", aspectRatio: "16/9", minHeight: 360,
           background: "#0A0A0A", boxShadow: "0 18px 40px rgba(0,0,0,0.28)",
         }}>
           <video
             src="/proyectos/escalera.mp4"
             autoPlay muted loop playsInline
+            aria-label="Video: escalera en estructura metálica soldada por BJ Soluciones"
             style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover" }}
           />
           <div style={{
             position: "absolute", inset: 0,
-            background: "linear-gradient(180deg, rgba(0,0,0,0.05) 0%, rgba(0,0,0,0.2) 45%, rgba(0,0,0,0.8) 100%)",
+            background: "linear-gradient(180deg, rgba(0,0,0,0.15) 0%, rgba(0,0,0,0.25) 40%, rgba(0,0,0,0.85) 100%)",
           }} />
           <span style={{
             position: "absolute", top: 16, left: 16,
@@ -373,17 +374,17 @@ export default function App() {
             padding: "0.25rem 0.8rem", borderRadius: 100,
           }}>Soldadura</span>
           <div style={{
-            position: "absolute", left: 0, right: 0, bottom: 0, padding: "1.5rem",
-            display: "flex", flexWrap: "wrap", alignItems: "flex-end", justifyContent: "space-between", gap: "1rem",
+            position: "absolute", left: 0, right: 0, bottom: 0, padding: "clamp(1rem, 4vw, 1.5rem)",
+            display: "flex", flexWrap: "wrap", alignItems: "flex-end", justifyContent: "space-between", gap: "0.85rem",
           }}>
-            <div>
+            <div style={{ flex: "1 1 240px" }}>
               <h3 style={{
                 fontFamily: "'Syne',sans-serif", fontWeight: 800, color: "white",
-                fontSize: "clamp(1.1rem,2.5vw,1.5rem)", marginBottom: 6,
+                fontSize: "clamp(1.1rem,4vw,1.5rem)", marginBottom: 6, lineHeight: 1.15,
                 textShadow: "0 2px 10px rgba(0,0,0,0.55)",
               }}>Escalera en estructura metálica</h3>
               <p style={{
-                color: "rgba(255,255,255,0.85)", fontSize: "0.88rem", maxWidth: 480,
+                color: "rgba(255,255,255,0.85)", fontSize: "clamp(0.8rem, 3vw, 0.88rem)", maxWidth: 480,
                 textShadow: "0 2px 10px rgba(0,0,0,0.5)",
               }}>Soldadura fina y acabado a la medida, pieza por pieza.</p>
             </div>

@@ -52,7 +52,7 @@ export default function Header({ config }) {
       <div style={{ maxWidth: 1100, margin: "0 auto", padding: "1.5rem 2rem", display: "flex", flexWrap: "wrap", alignItems: "center", justifyContent: "space-between", gap: "1.25rem" }}>
         {/* Logo / nombre */}
         <div style={{ display: "flex", alignItems: "center", gap: "1rem" }}>
-          {config.logo && <img src={config.logo} alt="logo" style={{ width: 52, height: 52, borderRadius: 10, objectFit: "contain", background: "rgba(255,255,255,0.1)", padding: 4 }} />}
+          {config.logo && <img src={config.logo} alt={`Logo de ${config.nombre}`} style={{ width: 52, height: 52, borderRadius: 10, objectFit: "contain", background: "rgba(255,255,255,0.1)", padding: 4 }} />}
           <div>
             {/* Ícono martillo decorativo */}
             <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
