@@ -1,16 +1,56 @@
 [
   {
     "id": 1,
-    "nombre": "Escalera de concreto",
-    "categoria": "Construcción",
-    "descripcion": "Diseño, formaleteo y colado de escaleras externas e internas. Incluye pasamanos de acero inoxidable.",
-    "antes": "/proyectos/antes.jpg",
-    "durante": "/proyectos/durante.jpg",
-    "despues": "/proyectos/proyect01-despues.jpg",
-    "destacado": true
+    "nombre": "Ampliación con estructura metálica",
+    "categoria": "Soldadura",
+    "descripcion": "Segunda planta y techado sobre estructura de acero, soldada y pintada a la medida de la casa.",
+    "antes": "/proyectos/soldadura-03-antes.jpeg",
+    "durante": "/proyectos/soldadura-03-durante.jpeg",
+    "despues": "/proyectos/soldadura-03-despues.jpeg",
+    "destacado": false
   },
   {
     "id": 2,
+    "nombre": "Estructura de techo y entrepiso metálico",
+    "categoria": "Soldadura",
+    "descripcion": "Armado de entrepiso y techo en estructura de acero galvanizado, listo para acabados.",
+    "antes": "/proyectos/soldadura-04-antes.jpeg",
+    "durante": "/proyectos/soldadura-04-durante.jpeg",
+    "despues": "/proyectos/soldadura-04-despues.jpeg",
+    "destacado": false
+  },
+  {
+    "id": 3,
+    "nombre": "Techo metálico a la medida",
+    "categoria": "Soldadura",
+    "descripcion": "Estructura y lámina de techo soldadas e instaladas a la medida del espacio.",
+    "antes": "/proyectos/soldadura-05-antes.jpeg",
+    "durante": "/proyectos/soldadura-05-despues.jpeg",
+    "despues": "/proyectos/soldadura-05-despues.jpeg",
+    "destacado": false
+  },
+  {
+    "id": 4,
+    "nombre": "Portón corredizo en aluminio",
+    "categoria": "Soldadura",
+    "descripcion": "Portón corredizo en aluminio con acabado en persiana, incluye puerta peatonal.",
+    "antes": "/proyectos/soldadura-porton00-durante.jpeg",
+    "durante": "/proyectos/soldadura-porton00-durante.jpeg",
+    "despues": "/proyectos/soldadura-porton00-durante.jpeg",
+    "destacado": false
+  },
+  {
+    "id": 5,
+    "nombre": "Escalera interior en estructura y vidrio",
+    "categoria": "Soldadura",
+    "descripcion": "Escalera interior con estructura metálica soldada y baranda de vidrio templado.",
+    "antes": "/proyectos/soldadura-escalera-01-antes.jpeg",
+    "durante": "/proyectos/soldadura-escalera-01-duranteb.jpeg",
+    "despues": "/proyectos/soldadura-escalera-01-despues.jpeg",
+    "destacado": false
+  },
+  {
+    "id": 6,
     "nombre": "Soldadura y estructuras metálicas",
     "categoria": "Soldadura",
     "descripcion": "Pasamanos, portones, estructuras de acero inoxidable y galvanizado. Trabajo fino y duradero.",
@@ -20,13 +60,73 @@
     "destacado": false
   },
   {
-    "id": 3,
+    "id": 7,
+    "nombre": "Pintura interior de sala",
+    "categoria": "Pintura",
+    "descripcion": "Pintura interior con acabado fino, lista para amueblar y decorar.",
+    "antes": "/proyectos/pintura-00-antes.jpeg",
+    "durante": "/proyectos/pintura-00-durante.jpeg",
+    "despues": "/proyectos/pintura-00-despues.jpeg",
+    "destacado": true
+  },
+  {
+    "id": 8,
+    "nombre": "Pintura y diseño gráfico de oficina",
+    "categoria": "Pintura",
+    "descripcion": "Pintura de oficina con paneles gráficos de color, acabado profesional.",
+    "antes": "/proyectos/pintura-01-antes.jpeg",
+    "durante": "/proyectos/pintura-01-durante.jpeg",
+    "despues": "/proyectos/pintura-01-despues.jpeg",
+    "destacado": false
+  },
+  {
+    "id": 9,
+    "nombre": "Escalera de concreto",
+    "categoria": "Construcción",
+    "descripcion": "Diseño, formaleteo y colado de escaleras externas e internas. Incluye pasamanos de acero inoxidable.",
+    "antes": "/proyectos/antes.jpg",
+    "durante": "/proyectos/durante.jpg",
+    "despues": "/proyectos/proyect01-despues.jpg",
+    "destacado": false
+  },
+  {
+    "id": 10,
     "nombre": "Remodelación general",
     "categoria": "Remodelación",
     "descripcion": "Transformamos su espacio de principio a fin. Demolición, construcción, acabados y limpieza final.",
     "antes": "/proyectos/proyectoB-antes.jpg",
     "durante": "/proyectos/proyectoB-durante.jpg",
     "despues": "/proyectos/proyectoB-despues.jpg",
-    "destacado": true
+    "destacado": false
+  },
+  {
+    "id": 11,
+    "nombre": "Remodelación de oficina",
+    "categoria": "Remodelación",
+    "descripcion": "Remodelación completa de oficina: pisos, pintura y limpieza final.",
+    "antes": "/proyectos/remodelacion-01-antes.jpeg",
+    "durante": "/proyectos/remodelacion-01-durante.jpeg",
+    "despues": "/proyectos/remodelacion-01-despues.jpeg",
+    "destacado": false
+  },
+  {
+    "id": 12,
+    "nombre": "Remodelación de baño",
+    "categoria": "Remodelación",
+    "descripcion": "Instalación de mueble de baño, tope en cuarzo y grifería.",
+    "antes": "/proyectos/remodelacion-04-antes.jpeg",
+    "durante": "/proyectos/remodelacion-04-durante.jpeg",
+    "despues": "/proyectos/remodelacion-04-despues.jpeg",
+    "destacado": false
+  },
+  {
+    "id": 13,
+    "nombre": "Enchape de terraza",
+    "categoria": "Remodelación",
+    "descripcion": "Enchape de terraza con porcelanato tipo mármol, acabado brillante.",
+    "antes": "/proyectos/remodelacion-06-antes.jpeg",
+    "durante": "/proyectos/remodelacion-06-durante.jpeg",
+    "despues": "/proyectos/remodelacion-06-despues.jpeg",
+    "destacado": false
   }
 ]

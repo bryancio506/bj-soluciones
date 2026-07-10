@@ -17,5 +17,5 @@
     "ubicacion": "Costa Rica",
     "horario": "Lun–Sáb 7am–5pm"
   },
-  "categorias": ["Todos", "Construcción", "Remodelación", "Acabados", "Soldadura"]
+  "categorias": ["Todos", "Soldadura", "Pintura", "Construcción", "Remodelación", "Acabados"]
 }
