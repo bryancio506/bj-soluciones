@@ -139,18 +139,26 @@ function HeroCarousel({ imagenes, accent, nombre }) {
       }}>{labels[idx]}</div>
 
       {/* Flechas */}
-      {[{fn:prev,side:"left",ch:"‹"},{fn:next,side:"right",ch:"›"}].map(({fn,side,ch})=>(
-        <button key={side} onClick={fn} style={{
-          position:"absolute", top:"50%", [side]:10, transform:"translateY(-50%)",
-          background:"rgba(0,0,0,0.45)", backdropFilter:"blur(4px)",
-          border:"none", color:"white", width:32, height:32, borderRadius:"50%",
-          cursor:"pointer", fontSize:"1.2rem", display:"flex", alignItems:"center", justifyContent:"center",
-          transition:"background 0.2s",
-        }}
-          onMouseOver={e=>e.currentTarget.style.background="rgba(0,0,0,0.7)"}
-          onMouseOut={e=>e.currentTarget.style.background="rgba(0,0,0,0.45)"}
-        >{ch}</button>
-      ))}
+      <button onClick={() => prev()} style={{
+        position:"absolute", top:"50%", left:10, transform:"translateY(-50%)",
+        background:"rgba(0,0,0,0.45)", backdropFilter:"blur(4px)",
+        border:"none", color:"white", width:32, height:32, borderRadius:"50%",
+        cursor:"pointer", fontSize:"1.2rem", display:"flex", alignItems:"center", justifyContent:"center",
+        transition:"background 0.2s",
+      }}
+        onMouseOver={e=>e.currentTarget.style.background="rgba(0,0,0,0.7)"}
+        onMouseOut={e=>e.currentTarget.style.background="rgba(0,0,0,0.45)"}
+      >‹</button>
+      <button onClick={() => next()} style={{
+        position:"absolute", top:"50%", right:10, transform:"translateY(-50%)",
+        background:"rgba(0,0,0,0.45)", backdropFilter:"blur(4px)",
+        border:"none", color:"white", width:32, height:32, borderRadius:"50%",
+        cursor:"pointer", fontSize:"1.2rem", display:"flex", alignItems:"center", justifyContent:"center",
+        transition:"background 0.2s",
+      }}
+        onMouseOver={e=>e.currentTarget.style.background="rgba(0,0,0,0.7)"}
+        onMouseOut={e=>e.currentTarget.style.background="rgba(0,0,0,0.45)"}
+      >›</button>
 
       {/* Dots */}
       <div style={{ position:"absolute", bottom:10, left:"50%", transform:"translateX(-50%)", display:"flex", gap:5 }}>
