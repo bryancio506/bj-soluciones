@@ -189,8 +189,10 @@ export default function App() {
       setConfig(cfg); setProyectos(cat)
       document.body.style.background = cfg.colores.bg
       document.title = cfg.nombre
-      const fav = document.getElementById("favicon")
-      if (fav) fav.href = generarFavicon(cfg.nombre[0], cfg.colores.accent)
+      if (!cfg.logo) {
+        const fav = document.getElementById("favicon")
+        if (fav) fav.href = generarFavicon(cfg.nombre[0], cfg.colores.accent)
+      }
     })
   }, [])
 

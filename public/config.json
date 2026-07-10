@@ -1,7 +1,7 @@
 {
   "nombre": "BJ Soluciones",
   "slogan": "Construcción · Remodelación · Acabados",
-  "logo": "",
+  "logo": "/logo.png",
   "colores": {
     "primary": "#1A1A1A",
     "accent": "#D72B2B",
