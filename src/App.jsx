@@ -3,6 +3,7 @@ import Header from "./components/Header"
 import Categorias from "./components/Categorias"
 import ProyectoCard from "./components/ProyectoCard"
 import Footer from "./components/Footer"
+import { IconWhatsApp } from "./icons"
 
 function generarFavicon(letra, color) {
   const c = document.createElement("canvas")
@@ -346,6 +347,59 @@ export default function App() {
           {heroImgs.length > 0 && (
             <HeroCarousel imagenes={heroImgs} accent={config.colores.accent} />
           )}
+        </div>
+      </section>
+
+      {/* ===== VIDEO DESTACADO ===== */}
+      <section style={{ padding: "2.5rem 2rem 0" }}>
+        <div style={{
+          maxWidth: 1100, margin: "0 auto", position: "relative",
+          borderRadius: 18, overflow: "hidden", aspectRatio: "16/9",
+          background: "#0A0A0A", boxShadow: "0 18px 40px rgba(0,0,0,0.28)",
+        }}>
+          <video
+            src="/proyectos/escalera.mp4"
+            autoPlay muted loop playsInline
+            style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover" }}
+          />
+          <div style={{
+            position: "absolute", inset: 0,
+            background: "linear-gradient(180deg, rgba(0,0,0,0.05) 0%, rgba(0,0,0,0.2) 45%, rgba(0,0,0,0.8) 100%)",
+          }} />
+          <span style={{
+            position: "absolute", top: 16, left: 16,
+            background: config.colores.accent, color: "white",
+            fontSize: "0.72rem", fontWeight: 700, letterSpacing: "0.04em",
+            padding: "0.25rem 0.8rem", borderRadius: 100,
+          }}>Soldadura</span>
+          <div style={{
+            position: "absolute", left: 0, right: 0, bottom: 0, padding: "1.5rem",
+            display: "flex", flexWrap: "wrap", alignItems: "flex-end", justifyContent: "space-between", gap: "1rem",
+          }}>
+            <div>
+              <h3 style={{
+                fontFamily: "'Syne',sans-serif", fontWeight: 800, color: "white",
+                fontSize: "clamp(1.1rem,2.5vw,1.5rem)", marginBottom: 6,
+                textShadow: "0 2px 10px rgba(0,0,0,0.55)",
+              }}>Escalera en estructura metálica</h3>
+              <p style={{
+                color: "rgba(255,255,255,0.85)", fontSize: "0.88rem", maxWidth: 480,
+                textShadow: "0 2px 10px rgba(0,0,0,0.5)",
+              }}>Soldadura fina y acabado a la medida, pieza por pieza.</p>
+            </div>
+            <a href={wa} target="_blank" rel="noreferrer" style={{
+              display: "flex", alignItems: "center", gap: 7,
+              background: config.colores.accent, color: "white",
+              padding: "0.65rem 1.1rem", borderRadius: 100,
+              fontSize: "0.85rem", fontWeight: 600, textDecoration: "none",
+              transition: "opacity 0.2s", whiteSpace: "nowrap",
+            }}
+              onMouseOver={e => e.currentTarget.style.opacity = "0.85"}
+              onMouseOut={e => e.currentTarget.style.opacity = "1"}
+            >
+              <IconWhatsApp size={15} /> Solicitar cotización
+            </a>
+          </div>
         </div>
       </section>
 

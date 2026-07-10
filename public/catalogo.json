@@ -12,7 +12,7 @@
   {
     "id": 2,
     "nombre": "Soldadura y estructuras metálicas",
-    "categoria": "Otros",
+    "categoria": "Soldadura",
     "descripcion": "Pasamanos, portones, estructuras de acero inoxidable y galvanizado. Trabajo fino y duradero.",
     "antes": "/proyectos/proyectoA-00.jpg",
     "durante": "/proyectos/proyectoA-01.jpg",
