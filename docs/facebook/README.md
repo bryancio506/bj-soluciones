@@ -147,18 +147,71 @@ como está escrito.
 
 | Orden | Qué subir | Texto |
 |---|---|---|
-| 1 | Carrusel: `salidas/01-segunda-planta.png` → `soldadura-03-antes/durante/despues.jpeg` | Post 1 |
-| 2 | Reel de `public/proyectos/escalera.mp4`, con `salidas/07-escalera-metalica.png` de portada | Post 2 |
-| 3 | Carrusel: `salidas/06-bano-antes-despues.png` → `remodelacion-04-antes/durante/despues.jpeg` | Post 4 |
-| 4 | Imagen sola: `salidas/03-servicios.png` | Post 5 (recap / pregunta a la audiencia) |
+| 1 | Imagen sola: `salidas/03-servicios.png` — **y fijalo arriba** | Copy A (abajo) |
+| 2 | Carrusel: `salidas/01-segunda-planta.png` → `soldadura-03-antes/durante/despues.jpeg` | Post 1 de `estrategia/04` |
+| 3 | Reel de `public/proyectos/escalera.mp4`, con `salidas/07-escalera-metalica.png` de portada | Post 2 de `estrategia/04` |
+| 4 | Carrusel: `salidas/06-bano-antes-despues.png` → `remodelacion-04-antes/durante/despues.jpeg` | Post 4 de `estrategia/04` |
+| 5 | `salidas/04-story-soldadura.png` | Copy B (abajo) |
 
-Las fotos de los proyectos están en `public/proyectos/`. La cuarta va sola a propósito: el
-Post 5 busca comentarios, no mostrar un proyecto.
+Las fotos de los proyectos están en `public/proyectos/`.
 
-El anuncio **03-servicios** conviene además **fijarlo arriba** ("Fijar en la parte superior
-de la página"): es el que resume todo y es lo primero que ve quien llega.
+**El de servicios va de primero y fijado** ("Fijar en la parte superior de la página"): es
+el que resume todo y es lo primero que ve quien llega a una página que todavía no conoce.
 
-El **04-story-soldadura** es formato 9:16 — ese no va al muro, va a **Historias**.
+---
+
+### Copy A — Presentación (para `03-servicios`, el post fijado)
+
+Este es el post de bienvenida. `estrategia/04` no lo tenía porque sus copys asumen una
+página que ya viene publicando; el Post 5 de ese documento arranca con *"este mes dejamos
+casas y oficinas listas…"*, que no calza para el primer post de una página recién abierta.
+
+```
+Mucho gusto — somos BJ Soluciones. 👷
+
+Somos contratistas de construcción en la GAM. Hacemos soldadura y estructuras
+metálicas, pintura, construcción y remodelación: de la demolición hasta la
+limpieza final. Así usted no tiene que andar contratando a cinco personas
+distintas para un solo proyecto.
+
+Materiales de calidad y mano de obra garantizada. Cotizamos gratis y sin
+compromiso.
+
+¿Qué proyecto tiene pendiente en su casa u oficina? Cuéntenos aquí abajo 👇
+📲 6004-0817
+
+#construccioncr #remodelacioncr #contratistacr #costarica #gam
+```
+
+La pregunta del final no es de relleno: los comentarios son lo que hace que Facebook e
+Instagram le muestren la página a gente que todavía no la sigue.
+
+### Copy B — Soldadura (para `04-story-soldadura`)
+
+```
+Si es de acero, lo hacemos. 🔩
+
+Escaleras, barandas y pasamanos. Portones, verjas y rejas. Techos y entrepisos.
+Y la estructura completa si lo que quiere es levantar una segunda planta.
+
+Todo soldado a la medida — cuando la casa ya está construida no existen las
+medidas estándar.
+
+Mándenos una foto del espacio por WhatsApp y le decimos qué se puede hacer.
+📲 6004-0817
+
+#soldaduracr #estructurametalica #portonescr #escalerasmetalicas #costarica #gam
+```
+
+El cierre pide **una foto**, no una cotización. Es mucho más fácil que alguien mande una
+foto que se anime a preguntar un precio — y una vez que la mandó, ya empezó la
+conversación.
+
+**Sobre el formato de este:** es 9:16 (vertical largo). En el muro de **Facebook** se ve
+bien, se muestra alto. En el feed de **Instagram** se recorta, así que ahí conviene usarlo
+en **Historias**. En Historias no se escribe caption: el texto va en la imagen (ya lo
+tiene) y se le agrega el **sticker de link** apuntando a
+`https://wa.me/50660040817`.
 
 Después de estos cuatro, seguí el ritmo de
 [`estrategia/03-calendario-publicacion.md`](../../estrategia/03-calendario-publicacion.md).
@@ -184,7 +237,7 @@ repetida. Mejor alternar, o que cada uno arranque por un anuncio distinto.
 - [ ] Botón de WhatsApp configurado con 6004-0817 y **probado desde otro teléfono**
 - [ ] Número del socio (6401-3395) agregado en la descripción
 - [ ] 4 publicaciones arriba antes de invitar gente
-- [ ] `03-servicios` fijado en la parte superior
+- [ ] `03-servicios` publicado con el Copy A y **fijado** en la parte superior
 - [ ] Instagram y Meta Business Suite → seguir `estrategia/01`, secciones 2 y 3
 
 ---
