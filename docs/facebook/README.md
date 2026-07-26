@@ -125,16 +125,35 @@ de la zona segura, agregale la clase `ver-guias` al `<body>`: aparecen dos marco
 Antes de invitar a nadie, dejá **3 o 4 publicaciones arriba**. Una página vacía no genera
 confianza.
 
-Cada anuncio ya hecho tiene su copy escrito en
-[`estrategia/04-copys-iniciales.md`](../../estrategia/04-copys-iniciales.md). El calce es
-este:
+### La imagen no reemplaza al texto del post
 
-| Orden | Imagen a subir | Texto |
+El anuncio se sube **tal cual**, sin agregarle nada encima. Pero la publicación **sí lleva
+texto** (el caption). No es opcional:
+
+- Facebook e Instagram muestran más lo que genera comentarios y guardados. Una imagen sin
+  texto casi no genera nada.
+- El número escrito **dentro** de la imagen no se puede copiar ni tocar. El del caption sí.
+- En Instagram los hashtags van en el caption: es así como te encuentra quien no te sigue.
+
+Los textos ya están escritos en
+[`estrategia/04-copys-iniciales.md`](../../estrategia/04-copys-iniciales.md).
+
+### Qué subir, en qué orden
+
+Ojo: los copys de `estrategia/04` fueron escritos para **carruseles** (varias fotos por
+publicación), no para una imagen sola. El anuncio va **de primero** porque es el que frena
+el scroll, y las fotos reales del proyecto van detrás como prueba. Así el copy calza tal
+como está escrito.
+
+| Orden | Qué subir | Texto |
 |---|---|---|
-| 1 | `anuncios/salidas/01-segunda-planta.png` | Post 1 de `04-copys-iniciales.md` |
-| 2 | `anuncios/salidas/07-escalera-metalica.png` | Post 2 — sirve de portada del Reel de `escalera.mp4` |
-| 3 | `anuncios/salidas/06-bano-antes-despues.png` | Post 4 |
-| 4 | `anuncios/salidas/03-servicios.png` | Post 5 (el de recap / pregunta a la audiencia) |
+| 1 | Carrusel: `salidas/01-segunda-planta.png` → `soldadura-03-antes/durante/despues.jpeg` | Post 1 |
+| 2 | Reel de `public/proyectos/escalera.mp4`, con `salidas/07-escalera-metalica.png` de portada | Post 2 |
+| 3 | Carrusel: `salidas/06-bano-antes-despues.png` → `remodelacion-04-antes/durante/despues.jpeg` | Post 4 |
+| 4 | Imagen sola: `salidas/03-servicios.png` | Post 5 (recap / pregunta a la audiencia) |
+
+Las fotos de los proyectos están en `public/proyectos/`. La cuarta va sola a propósito: el
+Post 5 busca comentarios, no mostrar un proyecto.
 
 El anuncio **03-servicios** conviene además **fijarlo arriba** ("Fijar en la parte superior
 de la página"): es el que resume todo y es lo primero que ve quien llega.
