@@ -4,6 +4,7 @@ import Categorias from "./components/Categorias"
 import ProyectoCard from "./components/ProyectoCard"
 import Footer from "./components/Footer"
 import { IconWhatsApp } from "./icons"
+import { formatearTelefono, linkWhatsApp, numerosWhatsApp } from "./utils"
 
 function generarFavicon(letra, color) {
   const c = document.createElement("canvas")
@@ -223,6 +224,9 @@ export default function App() {
 
   const wa = `https://wa.me/${config.contacto.whatsapp}?text=Hola%20BJ%20Soluciones%2C%20necesito%20una%20cotizaci%C3%B3n`
   const waQr = `https://api.qrserver.com/v1/create-qr-code/?size=300x300&margin=16&data=${encodeURIComponent(wa)}`
+  // Un link de WhatsApp solo puede apuntar a un número, así que los botones
+  // principales y el QR usan el primero; el resto se listan como alternativa.
+  const numerosWa = numerosWhatsApp(config.contacto)
 
   return (
     <div style={{ minHeight:"100vh", display:"flex", flexDirection:"column" }}>
@@ -246,6 +250,7 @@ export default function App() {
         </div>
         {/* Franja diagonal roja inspirada en tarjeta */}
         <div
+          className="hero-deco"
           style={{
             position:"absolute",
             left:-120,
@@ -262,6 +267,7 @@ export default function App() {
         {[70, 150, 230].map((top, i) => (
           <div
             key={i}
+            className="hero-deco"
             style={{
               position:"absolute",
               left:24,
@@ -282,7 +288,7 @@ export default function App() {
           {/* Texto */}
           <div style={{ flex:"1 1 300px" }}>
             <p style={{ fontSize:"0.7rem", textTransform:"uppercase", letterSpacing:"0.14em", color:config.colores.accent, fontWeight:700, marginBottom:12 }}>
-              Maestro de obras · Costa Rica
+              Contratistas de construcción · Costa Rica
             </p>
             <h2 style={{
               fontFamily:"'Syne',sans-serif", fontWeight:800,
@@ -360,9 +366,15 @@ export default function App() {
 
       {/* ===== VIDEO DESTACADO ===== */}
       <section style={{ padding: "2.5rem 2rem 0" }}>
+        {/* OJO: `width:100%` no es decorativo. Con `aspectRatio` + un `minHeight`
+            en píxeles fijos, el navegador deducía el ancho a partir del alto
+            (360 × 16/9 = 640px) y en móvil el bloque se salía de la pantalla.
+            Fijando el ancho, el alto es el que se deduce. Si cambiás el
+            minHeight, dejalo en unidades relativas. */}
         <div style={{
-          maxWidth: 1100, margin: "0 auto", position: "relative",
-          borderRadius: 18, overflow: "hidden", aspectRatio: "16/9", minHeight: 360,
+          width: "100%", maxWidth: 1100, margin: "0 auto", position: "relative",
+          borderRadius: 18, overflow: "hidden", aspectRatio: "16/9",
+          minHeight: "clamp(190px, 52vw, 360px)",
           background: "#0A0A0A", boxShadow: "0 18px 40px rgba(0,0,0,0.28)",
           isolation: "isolate", contain: "paint", transform: "translateZ(0)", WebkitTransform: "translateZ(0)",
         }}>
@@ -478,28 +490,34 @@ export default function App() {
               Escanea y cotiza por WhatsApp
             </h3>
             <p style={{ margin:0, color:"rgba(255,255,255,0.78)", lineHeight:1.6, maxWidth:460 }}>
-              Apunta tu cámara al código QR para abrir el chat directo. Si estás en celular, usa el botón para entrar con un toque.
+              Apunta tu cámara al código QR para abrir el chat directo. Si estás en celular, toca
+              cualquiera de los dos números y le contestamos.
             </p>
-            <a
-              href={wa}
-              target="_blank"
-              rel="noreferrer"
-              style={{
-                marginTop:14,
-                display:"inline-flex",
-                alignItems:"center",
-                gap:8,
-                background:config.colores.accent,
-                color:"#fff",
-                padding:"0.7rem 1.2rem",
-                borderRadius:999,
-                textDecoration:"none",
-                fontWeight:600,
-                fontSize:"0.92rem",
-              }}
-            >
-              <span aria-hidden="true">🟢</span> Abrir WhatsApp
-            </a>
+            <div style={{ marginTop:14, display:"flex", gap:10, flexWrap:"wrap" }}>
+              {numerosWa.map((numero, i) => (
+                <a
+                  key={numero}
+                  href={linkWhatsApp(numero)}
+                  target="_blank"
+                  rel="noreferrer"
+                  style={{
+                    display:"inline-flex",
+                    alignItems:"center",
+                    gap:8,
+                    background: i === 0 ? config.colores.accent : "transparent",
+                    border: i === 0 ? "1px solid transparent" : "1px solid rgba(255,255,255,0.3)",
+                    color:"#fff",
+                    padding:"0.7rem 1.2rem",
+                    borderRadius:999,
+                    textDecoration:"none",
+                    fontWeight:600,
+                    fontSize:"0.92rem",
+                  }}
+                >
+                  <span aria-hidden="true">🟢</span> {formatearTelefono(numero)}
+                </a>
+              ))}
+            </div>
           </div>
 
           <div style={{

@@ -2,9 +2,10 @@
 
 ## El negocio, en una línea
 
-BJ Soluciones es un maestro de obras en la GAM (Costa Rica): construcción, remodelación,
-soldadura y estructuras metálicas, pintura, electricidad y enchapes. Cotización por WhatsApp
-(6004-0817), sitio web ya en línea: https://bj-soluciones.netlify.app/
+BJ Soluciones es una empresa de **contratistas de construcción** en la GAM (Costa Rica):
+construcción, remodelación, soldadura y estructuras metálicas, pintura, electricidad y
+enchapes. Cotización por WhatsApp (6004-0817 y 6401-3395), sitio web ya en línea:
+https://bj-soluciones.netlify.app/
 
 Hoy **no existe página de Facebook ni cuenta de Instagram** — se arranca de cero.
 
