@@ -12,6 +12,9 @@ trabajo (calculá 1 hora).
    no aparece). Podés agregar una segunda categoría: `Servicio de reformas`.
 4. **Bio corta (una línea, aparece bajo el nombre):**
    `Construcción · Remodelación · Acabados — Costa Rica`
+4b. **Nombre de usuario:** `bjsoluciones.cr` — el mismo que se usa en Instagram (paso 2).
+   Sin esto el link de la página queda como `facebook.com/profile.php?id=6159…`, que no se
+   puede dictar ni poner en una tarjeta. Ver `docs/facebook/README.md`, Paso 2.
 5. **Foto de perfil:** usá `public/logo.png` del sitio (el isotipo cuadrado "BJ" en negro y
    rojo). Es el mismo logo del sitio y del favicon — mantiene todo consistente.
 6. **Foto de portada:** usá `public/og-image.jpg` (la misma imagen que se ve al compartir el
@@ -69,6 +72,7 @@ Esto es lo que permite programar publicaciones y ver todo desde un solo lugar.
 ## Checklist final de esta etapa
 
 - [ ] Página de Facebook creada, con foto, portada, categoría, bio y botón de WhatsApp
+- [ ] Nombre de usuario de la Página puesto (`bjsoluciones.cr`), igual al de Instagram
 - [ ] Cuenta de Instagram creada como cuenta profesional (Empresa), mismo logo, misma bio
 - [ ] Instagram vinculado a la Página de Facebook desde Meta Business Suite
 - [ ] Probaste el botón de WhatsApp en ambas redes (te tiene que abrir el chat)

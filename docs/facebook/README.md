@@ -70,9 +70,48 @@ Dos cosas a tener presentes que ese documento no aclara:
 
 - La categoría **"Contratista general"** es la correcta. Va alineada con lo que dice el
   sitio web (son contratistas, no maestros de obra).
-- La **foto de portada tiene un problema** — ver Paso 3.
+- La **foto de portada tiene un problema** — ver Paso 4.
 
-## Paso 2 — El botón de WhatsApp de la página
+## Paso 2 — El nombre de usuario (para que el link sea legible)
+
+Una página recién creada queda con un link así:
+
+```
+https://www.facebook.com/profile.php?id=61592664595153
+```
+
+Ese link no se puede dictar por teléfono, no se puede poner en una tarjeta y no dice nada.
+Se arregla poniéndole un **nombre de usuario** a la página:
+
+```
+https://www.facebook.com/bjsoluciones.cr
+```
+
+**Nombre de usuario recomendado: `bjsoluciones.cr`** — es el mismo que `estrategia/01`
+propone para Instagram. Que el handle sea **idéntico en las dos redes** es lo que hace que
+quien los vio en una los encuentre en la otra.
+
+Dónde se pone: página → **Configuración** → **Información de la página** → **Nombre de
+usuario**. También aparece en Meta Business Suite, en la misma sección.
+
+Reglas:
+
+- Mínimo **5 caracteres**.
+- Solo letras, números y **puntos**. Nada de guiones, espacios ni guion bajo.
+- Tiene que estar libre.
+- Se puede cambiar después, pero Meta limita cada cuánto — conviene elegirlo bien de una.
+
+Si a la página recién creada todavía no le aparece la opción, suele habilitarse después de
+un par de días o de publicar unas cuantas veces. El link viejo (`profile.php?id=…`) sigue
+funcionando después de ponerlo, no se rompe nada de lo ya compartido.
+
+> **Cuando esté puesto:** hay que agregarlo al sitio web. En `index.html`, el bloque
+> `application/ld+json` describe el negocio para Google; ahí va un campo `sameAs` con el
+> link de la página de Facebook (y el de Instagram). Eso es lo que le dice a Google que el
+> sitio y la página son el mismo negocio. Todavía no está puesto porque faltaba definir el
+> nombre de usuario.
+
+## Paso 3 — El botón de WhatsApp de la página
 
 Amplía el punto 7 de `estrategia/01`.
 
@@ -97,7 +136,7 @@ El número del socio (**6401-3395**) va en:
 
 Así los dos números circulan sin pelearse por el mismo botón.
 
-## Paso 3 — La foto de portada
+## Paso 4 — La foto de portada
 
 **Ya está hecha:** `anuncios/salidas/portada-facebook.png` (1640×624). Se sube tal cual.
 
@@ -120,7 +159,7 @@ Si querés cambiarle la foto de fondo o los servicios, editá
 de la zona segura, agregale la clase `ver-guias` al `<body>`: aparecen dos marcos punteados
 (verde = lo que se ve en celular, rojo = donde tapa la foto de perfil).
 
-## Paso 4 — Las primeras publicaciones
+## Paso 5 — Las primeras publicaciones
 
 Antes de invitar a nadie, dejá **3 o 4 publicaciones arriba**. Una página vacía no genera
 confianza.
@@ -216,7 +255,7 @@ tiene) y se le agrega el **sticker de link** apuntando a
 Después de estos cuatro, seguí el ritmo de
 [`estrategia/03-calendario-publicacion.md`](../../estrategia/03-calendario-publicacion.md).
 
-## Paso 5 — Los estados de WhatsApp
+## Paso 6 — Los estados de WhatsApp
 
 Son dos juegos de las mismas siete imágenes, cambia solo el número impreso:
 
@@ -231,6 +270,7 @@ repetida. Mejor alternar, o que cada uno arranque por un anuncio distinto.
 ## Checklist
 
 - [ ] Página creada con nombre, categoría "Contratista general", bio y descripción
+- [ ] **Nombre de usuario** puesto (`bjsoluciones.cr`) — que el link no sea `profile.php?id=…`
 - [ ] Foto de perfil = `public/logo.png`
 - [ ] Portada subida = `anuncios/salidas/portada-facebook.png`
 - [ ] Sitio web `https://bj-soluciones.netlify.app/` en la información de la página
