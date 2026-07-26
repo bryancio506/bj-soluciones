@@ -57,7 +57,7 @@ export default function Header({ config }) {
               <svg width="22" height="22" viewBox="0 0 24 24" fill={config.colores.accent}>
                 <path d="M15.5 2.1L11 6.6 9.5 5.1 5.6 9l1.5 1.5-5.1 5.1v3h3l5.1-5.1 1.5 1.5 3.9-3.9-1.5-1.5 4.5-4.5-3-3z"/>
               </svg>
-              <h1 style={{ fontFamily: "'Syne',sans-serif", fontWeight: 800, fontSize: "1.7rem", color: "white", letterSpacing: "-0.02em", lineHeight: 1 }}>
+              <h1 style={{ fontFamily: "'Syne',sans-serif", fontWeight: 800, fontSize: "clamp(1.3rem, 6vw, 1.7rem)", color: "white", letterSpacing: "-0.02em", lineHeight: 1 }}>
                 {config.nombre}
               </h1>
             </div>

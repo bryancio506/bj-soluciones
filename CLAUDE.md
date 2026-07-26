@@ -82,6 +82,15 @@ generated via `api.qrserver.com` pointing at a `wa.me` deep link). `config.conta
 string (country code + number, e.g. `50660040817`) used to build `https://wa.me/<number>?text=<encoded msg>`
 links.
 
+There are **two numbers**: the owner's (`contacto.whatsapp`) and a business partner's
+(`contacto.whatsapp2`). A `wa.me` link can only target one number, so the primary CTAs and the QR keep the
+first one; the second is listed as an alternative in the footer and in the "Contacto rápido" card.
+`src/utils.js` holds the shared helpers (`numerosWhatsApp` returns the configured numbers in order,
+`formatearTelefono` renders `50660040817` as `+506 6004-0817`, `linkWhatsApp` builds the deep link).
+
+**They are contratistas (contractors), not "maestros de obra".** The site, meta tags, JSON-LD and the
+`estrategia/` docs all say "contratistas de construcción" — don't reintroduce the old wording.
+
 **Per-client deployment model:** this template is meant to be duplicated per client (see `README.md`). New
 clients are onboarded purely by editing `public/config.json` and `public/catalogo.json` — no code changes
 expected. Keep that separation in mind: business/content data belongs in those JSON files, not hardcoded into
@@ -109,11 +118,35 @@ the whole page and caused scroll-right to reveal stray content. If you add more 
 absolutely-positioned decorative elements, keep this rule or re-verify with a real mobile-width check
 (`window.innerWidth` should equal the viewport width, not something wider).
 
+**That rule only hid the symptom, though.** Measure `document.body.scrollWidth` at a 390px viewport, not just
+`documentElement.scrollWidth` — the latter is clamped by `overflow-x: hidden` and will read 390 even when the
+layout is genuinely broken. Two real bugs were found and fixed that way:
+
+- The "video destacado" container had `aspectRatio: "16/9"` plus `minHeight: 360` (a fixed pixel value).
+  Below ~640px viewport width the browser derived the *width* from that min-height (360 × 16/9 = 640px), so
+  the block was 640px wide inside a 326px column and got clipped. Fixed by pinning `width: "100%"` and making
+  the min-height relative (`clamp(190px, 52vw, 360px)`). **If you set `aspect-ratio`, never pair it with a
+  fixed-px `min-height` without an explicit width.**
+- The hero's rotated red stripe and its decorative dots swallowed the accent-red eyebrow text (red on red)
+  and hung off the left edge on phones. They now carry `className="hero-deco"` and `src/index.css` hides them
+  under 760px. Keep decorative-only hero elements on that class so they can be dropped on mobile.
+
+`src/index.css` is the only place media queries can live, since the components are inline-styled — add a
+class name to the element and the breakpoint rule there.
+
 ## Non-code deliverables
 
 - `docs/` — brand assets and identity notes (`docs/marca.md`, `docs/branding/`). Rejected design proposals
   (business card concepts, ad mockups) were deliberately deleted once the client picked a direction; don't
   recreate them from git history without being asked.
+- `anuncios/` — 7 social-media ads built as standalone HTML "canvases" (one folder each, `index.html`),
+  exported to PNG with `anuncios/exportar.sh` via headless Chromium. `_marca/marca.css` holds the shared
+  design system (colors mirrored from `public/config.json`, self-hosted Syne/DM Sans in `_marca/fuentes/`);
+  the per-ad HTML only does layout. Photos are referenced by relative path into `public/proyectos/` — there
+  are **no copies**, so adding a photo to the site makes it available to the ads. `exportar.sh --ambos`
+  renders two sets (owner's number and the partner's) from the same HTML by swapping the number in a temp
+  copy — **don't create duplicate per-number folders.** `anuncios/salidas/` is gitignored (regenerable,
+  ~14 MB). Read `anuncios/README.md` before editing.
 - `estrategia/` — a social-media marketing plan for the client (not code): 8 markdown docs (`00`–`07`) plus
   `plan-de-marketing-bj-soluciones.pdf`, a condensed 9-page executive version generated from an HTML file via
   headless Chromium (`chromium --headless=new --print-to-pdf=...`). If the plan's assumptions change

@@ -20,3 +20,12 @@ body {
   color: #1A1A1A;
   line-height: 1.6;
 }
+
+/* La franja diagonal roja y los puntos del hero son decorativos y están
+   pensados para pantalla ancha. En el celular ocupan medio hero, se comen
+   el texto rojo del antetítulo (rojo sobre rojo, ilegible) y se salen por
+   la izquierda. Ahí se ocultan: el fondo de herramientas y el degradado
+   ya le dan carácter al hero. */
+@media (max-width: 760px) {
+  .hero-deco { display: none !important; }
+}
