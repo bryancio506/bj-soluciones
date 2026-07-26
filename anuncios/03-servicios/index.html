@@ -1,0 +1,139 @@
+<!doctype html>
+<!--
+  ANUNCIO 03 — "Carta de servicios" (anuncio de marca)
+  ===========================================================================
+  Formato : 1080 x 1080 (1:1)  →  feed de Facebook e Instagram
+  Servicio: todos — este es el anuncio "paraguas", el que se deja corriendo
+            cuando no hay un proyecto puntual que promocionar.
+  Estructura: foto de fondo + tres miniaturas de servicios + bloque de contacto
+            + tira con los servicios abajo.
+
+  QUÉ SE PUEDE CAMBIAR
+  --------------------
+  · La foto grande de fondo → <img class="foto"> al inicio del lienzo.
+  · Las tres miniaturas → las <img> dentro de .columna-circulos. Conviene que
+    sean de servicios distintos (una de soldadura, una de pintura, una de
+    remodelación) para que se entienda la variedad de un vistazo.
+  · La tira de abajo → los <span> dentro de .servicios. Si agregás uno más,
+    bajá el `font-size` de .servicios span o no cabe.
+
+  EXPORTAR: desde anuncios/ correr  ./exportar.sh 03-servicios
+-->
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <title>BJ Soluciones — Anuncio 03 · Servicios (1080×1080)</title>
+  <link rel="stylesheet" href="../_marca/marca.css">
+  <style>
+    :root { --w: 1080px; --h: 1080px; }   /* formato 1:1 */
+
+    .chapa-esq { position: absolute; top: 44px; right: 44px; }
+
+    .columna-circulos {
+      position: absolute; left: 46px; top: 236px; z-index: 3;
+      display: flex; flex-direction: column; gap: 26px;
+    }
+    /* Las miniaturas van un poco más brillantes que el fondo para que resalten. */
+    .columna-circulos .circulo { width: 202px; height: 202px; }
+    .columna-circulos img { filter: brightness(1.14) saturate(1.06); }
+
+    .panel-contacto {
+      position: absolute; right: 44px; top: 214px; width: 700px; z-index: 4;
+      display: flex; flex-direction: column; align-items: center; gap: 20px;
+      text-align: center;
+      text-shadow: 0 2px 14px rgba(0,0,0,.6);   /* despega el texto de la foto */
+    }
+    .panel-contacto .titular { font-size: 42px; }
+    .panel-contacto .wa, .panel-contacto .caja-web { text-shadow: none; }
+    .panel-contacto .rotulo {
+      font-size: 24px; font-weight: 700; letter-spacing: .18em; text-transform: uppercase;
+    }
+    .panel-contacto .ubicacion {
+      display: flex; align-items: center; gap: 10px;
+      font-size: 24px; font-weight: 600;
+    }
+    .panel-contacto .ubicacion svg { width: 26px; height: 26px; fill: var(--rojo); }
+
+    .caja-web {
+      background: var(--rojo); border-radius: 18px; padding: 16px 34px; width: 100%;
+    }
+    .caja-web .arriba {
+      font-size: 17px; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; opacity: .9;
+    }
+    .caja-web .sitio {
+      font-family: var(--head); font-weight: 800; font-size: 27px; margin-top: 4px;
+      letter-spacing: -.02em; white-space: nowrap;
+    }
+
+    .tira { position: absolute; left: 46px; right: 46px; bottom: 44px; }
+  </style>
+</head>
+<body data-ancho="1080" data-alto="1080">
+
+<div class="lienzo">
+
+  <!-- ---------- FOTO DE FONDO ---------- -->
+  <div class="capa-foto">
+    <img class="foto" style="object-position: center 60%; filter: brightness(1.1)"
+         src="../../public/proyectos/pintura-00-despues.jpeg"
+         alt="Sala terminada">
+  </div>
+  <!-- Velo suave: la foto tiene que seguir viéndose, solo se baja para que el
+       texto blanco se lea. Si el texto cuesta leerse, subí el 0.42 a 0.5. -->
+  <div class="velo-todo" style="background: rgba(10,10,10,.42)"></div>
+  <div class="velo-izq" style="opacity:.55"></div>
+
+  <!-- ---------- FIRMA DE MARCA ---------- -->
+  <div class="chapa-marca chapa-esq">
+    <img src="../../public/logo.png" alt="Logo BJ Soluciones">
+    <div>
+      <div class="nombre">BJ Soluciones</div>
+      <div class="slogan">Construcción · Remodelación</div>
+    </div>
+  </div>
+
+  <!-- ---------- MINIATURAS DE SERVICIOS ---------- -->
+  <div class="columna-circulos">
+    <div class="circulo"><img src="../../public/proyectos/soldadura-porton00-durante.jpeg" alt="Portón en aluminio"></div>
+    <div class="circulo"><img src="../../public/proyectos/pintura-01-despues.jpeg" alt="Oficina pintada"></div>
+    <div class="circulo"><img src="../../public/proyectos/remodelacion-04-despues.jpeg" alt="Baño remodelado"></div>
+  </div>
+
+  <!-- ---------- CONTACTO ---------- -->
+  <div class="panel-contacto">
+    <h1 class="titular">Su proyecto,<br>de principio a fin</h1>
+
+    <div class="rotulo">Contáctenos</div>
+
+    <div class="wa blanca">
+      <span class="icono">
+        <svg viewBox="0 0 24 24"><path d="M17.47 14.38c-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.16-.17.2-.35.22-.64.08-.3-.15-1.26-.46-2.39-1.48-.88-.79-1.48-1.76-1.65-2.06-.17-.3-.02-.46.13-.61.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.03-.52-.07-.15-.67-1.61-.92-2.21-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.79.37-.27.3-1.04 1.02-1.04 2.48s1.07 2.87 1.21 3.07c.15.2 2.1 3.2 5.08 4.49.71.3 1.26.49 1.69.62.71.23 1.36.2 1.87.12.57-.09 1.76-.72 2-1.41.25-.7.25-1.29.18-1.42-.08-.12-.28-.2-.57-.35M12.05 21.79h-.01a9.87 9.87 0 0 1-5.03-1.38l-.36-.21-3.74.98 1-3.65-.24-.37a9.86 9.86 0 0 1-1.51-5.26c0-5.45 4.44-9.89 9.89-9.89 2.64 0 5.12 1.03 6.99 2.9a9.83 9.83 0 0 1 2.89 6.99c0 5.45-4.44 9.89-9.88 9.89m8.41-18.3A11.82 11.82 0 0 0 12.05 0C5.5 0 .16 5.34.16 11.89c0 2.1.55 4.14 1.59 5.95L.06 24l6.3-1.65a11.88 11.88 0 0 0 5.69 1.45c6.55 0 11.89-5.34 11.89-11.89 0-3.18-1.24-6.17-3.48-8.41"/></svg>
+      </span>
+      <span class="texto">
+        <span class="arriba">WhatsApp</span>
+        <span class="numero">6004-0817</span>
+      </span>
+    </div>
+
+    <div class="ubicacion">
+      <svg viewBox="0 0 24 24"><path d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5z"/></svg>
+      Toda la GAM · Costa Rica
+    </div>
+
+    <div class="caja-web">
+      <div class="arriba">Vea más proyectos en</div>
+      <div class="sitio">bj-soluciones.netlify.app</div>
+    </div>
+  </div>
+
+  <!-- ---------- TIRA DE SERVICIOS ---------- -->
+  <div class="servicios tira">
+    <span>Soldadura</span>
+    <span>Pintura</span>
+    <span>Construcción</span>
+    <span>Remodelación</span>
+  </div>
+
+</div>
+</body>
+</html>

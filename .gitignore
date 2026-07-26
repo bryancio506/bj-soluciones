@@ -12,6 +12,11 @@ dist
 dist-ssr
 *.local
 
+# PNGs exportados de los anuncios: se regeneran con `anuncios/exportar.sh --ambos`
+# (son ~14 MB y salen del HTML, que sí está versionado).
+anuncios/salidas/
+anuncios/*/.tmp-socio.html
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json

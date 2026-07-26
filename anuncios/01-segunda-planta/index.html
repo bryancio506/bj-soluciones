@@ -1,0 +1,104 @@
+<!doctype html>
+<!--
+  ANUNCIO 01 — "Segunda planta / ampliación"
+  ===========================================================================
+  Formato : 1080 x 1350 (4:5)  →  publicación de feed en Facebook e Instagram
+  Servicio: Soldadura / estructura metálica
+  Objetivo: mensajes por WhatsApp (ver estrategia/06-plan-ads.md)
+
+  QUÉ SE PUEDE CAMBIAR SIN ROMPER NADA
+  ------------------------------------
+  · La foto  → cambiá el `src` de <img class="foto">. Si el encuadre queda mal,
+               ajustá `object-position` (el primer valor mueve horizontal, el
+               segundo vertical: "center 20%" sube la foto, "center 80%" la baja).
+  · El texto → todo lo que está entre las etiquetas. El titular se agranda o
+               achica con `font-size` en el bloque <style> de abajo.
+  · El teléfono y los colores viven en ../_marca/marca.css (se cambian una sola
+    vez y aplican a todos los anuncios).
+
+  EXPORTAR A IMAGEN: desde la carpeta anuncios/ correr  ./exportar.sh 01-segunda-planta
+-->
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <title>BJ Soluciones — Anuncio 01 · Segunda planta (1080×1350)</title>
+  <link rel="stylesheet" href="../_marca/marca.css">
+  <style>
+    :root { --w: 1080px; --h: 1350px; }   /* formato 4:5 */
+
+    .titular { font-size: 86px; }
+
+    .cabecera { position: absolute; top: 54px; left: 60px; z-index: 4; }
+
+    .bloque-titular { position: absolute; top: 250px; left: 60px; right: 60px; z-index: 4; }
+    .bloque-titular .antetitulo { margin-bottom: 22px; }
+    .bloque-titular .sello { margin-top: 30px; }
+
+    .bloque-pie { position: absolute; left: 60px; right: 60px; bottom: 56px; z-index: 4; }
+    .bloque-pie .lista-check { margin-bottom: 38px; }
+  </style>
+</head>
+<body data-ancho="1080" data-alto="1350">
+
+<div class="lienzo">
+
+  <!-- ---------- FOTO DE FONDO ---------- -->
+  <div class="capa-foto">
+    <img class="foto" style="object-position: center 46%"
+         src="../../public/proyectos/soldadura-03-despues.jpeg"
+         alt="Segunda planta con estructura metálica terminada">
+  </div>
+  <div class="velo-dos-puntas"></div>
+
+  <!-- ---------- LOGO ---------- -->
+  <div class="cabecera">
+    <div class="marca">
+      <img src="../../public/logo.png" alt="Logo BJ Soluciones">
+      <div>
+        <div class="nombre">BJ Soluciones</div>
+        <div class="slogan">Construcción · Remodelación · Acabados</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ---------- TITULAR ---------- -->
+  <div class="bloque-titular">
+    <div class="antetitulo clara">Ampliaciones · Estructura metálica</div>
+    <h1 class="titular">
+      ¿Le hace falta<br>
+      <span class="resalte">espacio?</span>
+    </h1>
+    <div class="sello">Le construimos la segunda planta</div>
+  </div>
+
+  <!-- ---------- BENEFICIOS + LLAMADO A LA ACCIÓN ---------- -->
+  <div class="bloque-pie">
+    <ul class="lista-check">
+      <li>
+        <span class="check"><svg viewBox="0 0 24 24"><path d="M4 12.6l5.2 5.2L20 6.6" fill="none" stroke="#fff" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        Estructura de acero: más rápida que el block
+      </li>
+      <li>
+        <span class="check"><svg viewBox="0 0 24 24"><path d="M4 12.6l5.2 5.2L20 6.6" fill="none" stroke="#fff" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        Diseño a la medida de su casa
+      </li>
+      <li>
+        <span class="check"><svg viewBox="0 0 24 24"><path d="M4 12.6l5.2 5.2L20 6.6" fill="none" stroke="#fff" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        Nos ajustamos a su presupuesto
+      </li>
+    </ul>
+
+    <div class="wa">
+      <span class="icono">
+        <svg viewBox="0 0 24 24"><path d="M17.47 14.38c-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.16-.17.2-.35.22-.64.08-.3-.15-1.26-.46-2.39-1.48-.88-.79-1.48-1.76-1.65-2.06-.17-.3-.02-.46.13-.61.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.03-.52-.07-.15-.67-1.61-.92-2.21-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.79.37-.27.3-1.04 1.02-1.04 2.48s1.07 2.87 1.21 3.07c.15.2 2.1 3.2 5.08 4.49.71.3 1.26.49 1.69.62.71.23 1.36.2 1.87.12.57-.09 1.76-.72 2-1.41.25-.7.25-1.29.18-1.42-.08-.12-.28-.2-.57-.35M12.05 21.79h-.01a9.87 9.87 0 0 1-5.03-1.38l-.36-.21-3.74.98 1-3.65-.24-.37a9.86 9.86 0 0 1-1.51-5.26c0-5.45 4.44-9.89 9.89-9.89 2.64 0 5.12 1.03 6.99 2.9a9.83 9.83 0 0 1 2.89 6.99c0 5.45-4.44 9.89-9.88 9.89m8.41-18.3A11.82 11.82 0 0 0 12.05 0C5.5 0 .16 5.34.16 11.89c0 2.1.55 4.14 1.59 5.95L.06 24l6.3-1.65a11.88 11.88 0 0 0 5.69 1.45c6.55 0 11.89-5.34 11.89-11.89 0-3.18-1.24-6.17-3.48-8.41"/></svg>
+      </span>
+      <span class="texto">
+        <span class="arriba">Cotización gratis · escríbanos</span>
+        <span class="numero">6004-0817</span>
+      </span>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>

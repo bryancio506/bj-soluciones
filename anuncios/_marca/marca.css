@@ -1,0 +1,387 @@
+/* ============================================================================
+   BJ SOLUCIONES — Sistema de marca para anuncios
+   ----------------------------------------------------------------------------
+   Esto es lo COMPARTIDO por todos los anuncios: colores, fuentes y las piezas
+   que se repiten (logo, titulares, viñetas, botón de WhatsApp, pie de contacto).
+
+   Cada anuncio vive en su propia carpeta con su `index.html` y solo arma el
+   layout — los colores y tipografías salen de aquí. Si cambia el teléfono, el
+   color de marca o la tipografía, se cambia UNA vez en este archivo y todos los
+   anuncios quedan actualizados.
+
+   Los colores son los mismos de `public/config.json` del sitio web.
+   ============================================================================ */
+
+/* --- Tipografías (archivos locales: funcionan sin internet) --------------- */
+@font-face {
+  font-family: 'Syne';
+  src: url('fuentes/syne.woff2') format('woff2');
+  font-weight: 400 800;
+  font-display: block;
+}
+@font-face {
+  font-family: 'DM Sans';
+  src: url('fuentes/dmsans.woff2') format('woff2');
+  font-weight: 100 1000;
+  font-display: block;
+}
+
+/* --- Variables de marca --------------------------------------------------- */
+:root {
+  --negro:  #1A1A1A;   /* config.json → colores.primary */
+  --rojo:   #D72B2B;   /* config.json → colores.accent  */
+  --crema:  #F2F0ED;   /* config.json → colores.bg      */
+  --gris:   #6B6560;
+  --wa:     #25D366;   /* verde oficial de WhatsApp     */
+
+  --head: 'Syne', 'Arial Black', sans-serif;
+  --body: 'DM Sans', Arial, sans-serif;
+
+  /* Tamaño del lienzo. Cada anuncio lo redefine según su formato:
+       4:5  feed vertical .... 1080 x 1350
+       1:1  feed cuadrado .... 1080 x 1080
+       9:16 historia/reel .... 1080 x 1920                                    */
+  --w: 1080px;
+  --h: 1350px;
+}
+
+/* --- Base ----------------------------------------------------------------- */
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: var(--body);
+  background: #4a4a4a;              /* solo se ve en el navegador, no se exporta */
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+/* El lienzo es el anuncio en sí. Todo lo que se salga de aquí se recorta. */
+.lienzo {
+  position: relative;
+  width: var(--w);
+  height: var(--h);
+  overflow: hidden;
+  background: var(--negro);
+  color: #fff;
+  isolation: isolate;
+}
+
+/* ============================================================================
+   FOTOS
+   ============================================================================ */
+
+/* Foto que llena su contenedor sin deformarse.
+   `object-position` se ajusta por anuncio cuando hay que reencuadrar
+   (ej. style="object-position: center 30%" para subir el encuadre).          */
+.foto {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.capa-foto { position: absolute; inset: 0; z-index: 0; }
+
+/* Velos: oscurecen la foto para que el texto se lea. Sin esto el titular
+   compite con la foto y no se entiende ninguno de los dos.                   */
+.velo-abajo  { position: absolute; inset: 0; background: linear-gradient(to top,    rgba(10,10,10,.92) 0%, rgba(10,10,10,.65) 28%, rgba(10,10,10,0) 62%); }
+.velo-arriba { position: absolute; inset: 0; background: linear-gradient(to bottom, rgba(10,10,10,.90) 0%, rgba(10,10,10,.45) 38%, rgba(10,10,10,0) 68%); }
+.velo-izq    { position: absolute; inset: 0; background: linear-gradient(to right,  rgba(10,10,10,.90) 0%, rgba(10,10,10,.55) 45%, rgba(10,10,10,0) 85%); }
+.velo-todo   { position: absolute; inset: 0; background: rgba(10,10,10,.55); }
+/* Oscurece arriba y abajo pero deja limpio el centro de la foto. */
+.velo-dos-puntas {
+  position: absolute; inset: 0;
+  background: linear-gradient(to bottom,
+    rgba(10,10,10,.90) 0%, rgba(10,10,10,.55) 20%, rgba(10,10,10,0) 40%,
+    rgba(10,10,10,0) 48%, rgba(10,10,10,.70) 72%, rgba(10,10,10,.95) 100%);
+}
+
+/* ============================================================================
+   MOTIVO DIAGONAL
+   El logo tiene una cuña roja en diagonal. Ese corte se repite en los anuncios
+   para que se reconozcan como de la misma marca.
+   ============================================================================ */
+.cunia-roja {
+  position: absolute;
+  background: var(--rojo);
+  z-index: 1;
+}
+
+/* Línea diagonal delgada, para separar bloques. */
+.filo-rojo {
+  position: absolute;
+  background: var(--rojo);
+  z-index: 3;
+}
+
+/* ============================================================================
+   LOGO / FIRMA DE MARCA
+   ============================================================================ */
+.marca {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  z-index: 4;
+}
+.marca img { width: 96px; height: 96px; border-radius: 20px; display: block; }
+.marca .nombre {
+  font-family: var(--head);
+  font-weight: 800;
+  font-size: 38px;
+  letter-spacing: -.01em;
+  line-height: 1;
+  text-transform: uppercase;
+}
+.marca .slogan {
+  font-size: 19px;
+  font-weight: 500;
+  letter-spacing: .04em;
+  margin-top: 7px;
+  opacity: .85;
+  text-transform: uppercase;
+}
+/* Variante para fondos claros */
+.marca.oscura { color: var(--negro); }
+/* Variante compacta, para esquinas */
+.marca.chica img { width: 68px; height: 68px; border-radius: 15px; }
+.marca.chica .nombre { font-size: 27px; }
+.marca.chica .slogan { font-size: 14px; margin-top: 5px; letter-spacing: .05em; }
+.marca.chica { gap: 14px; }
+/* Logo a la derecha del texto (para alinear a la esquina derecha) */
+.marca.derecha { flex-direction: row-reverse; text-align: right; }
+
+/* Píldora roja con el logo — firma llamativa sobre foto. */
+.chapa-marca {
+  display: inline-flex; align-items: center; gap: 20px;
+  background: var(--rojo); color: #fff;
+  border-radius: 999px; padding: 16px 40px 16px 18px;
+  z-index: 4;
+}
+.chapa-marca img { width: 78px; height: 78px; border-radius: 17px; display: block; }
+.chapa-marca .nombre {
+  font-family: var(--head); font-weight: 800; font-size: 40px;
+  line-height: 1; text-transform: uppercase; letter-spacing: -.01em;
+}
+.chapa-marca .slogan {
+  font-size: 15px; font-weight: 700; letter-spacing: .1em;
+  text-transform: uppercase; opacity: .9; margin-top: 6px;
+}
+
+/* ============================================================================
+   TEXTOS
+   ============================================================================ */
+.antetitulo {
+  font-family: var(--body);
+  font-weight: 700;
+  font-size: 24px;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  color: var(--rojo);
+}
+.antetitulo.clara { color: #fff; }
+
+.titular {
+  font-family: var(--head);
+  font-weight: 800;
+  text-transform: uppercase;
+  line-height: .93;
+  letter-spacing: -.02em;
+  font-size: 82px;         /* cada anuncio lo puede subir o bajar */
+  text-wrap: balance;
+}
+
+/* Palabra o frase resaltada con el rojo de la marca. */
+.resalte {
+  background: var(--rojo);
+  color: #fff;
+  padding: .04em .22em .1em;
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+}
+.resalte.negra { background: var(--negro); }
+
+.bajada {
+  font-size: 30px;
+  line-height: 1.35;
+  font-weight: 500;
+  opacity: .92;
+}
+
+/* Sello: rectángulo sólido con una frase corta. Sirve de "respuesta" al
+   titular (ej. titular pregunta, sello responde).                           */
+.sello {
+  display: inline-block;
+  background: var(--negro);
+  color: #fff;
+  font-family: var(--head);
+  font-weight: 800;
+  font-size: 34px;
+  letter-spacing: .02em;
+  text-transform: uppercase;
+  padding: 16px 30px;
+  border-left: 8px solid var(--rojo);
+}
+.sello.roja  { background: var(--rojo); border-left-color: var(--negro); }
+.sello.clara { background: var(--crema); color: var(--negro); }
+
+/* ============================================================================
+   LISTA CON CHECKS
+   ============================================================================ */
+.lista-check { list-style: none; display: flex; flex-direction: column; gap: 18px; }
+.lista-check li {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  font-size: 28px;
+  font-weight: 700;
+  letter-spacing: .01em;
+}
+/* La palomita es un <span class="check"> con un SVG adentro (ver el HTML de
+   cualquier anuncio) — así se puede cambiar el color del cuadro sin tocar
+   el ícono.                                                                  */
+.lista-check li .check {
+  flex: 0 0 34px; height: 34px; border-radius: 9px;
+  background: var(--rojo);
+  display: grid; place-items: center;
+}
+.lista-check li .check svg { width: 22px; height: 22px; }
+.lista-check.checks-blancos li .check { background: #fff; }
+.lista-check.checks-blancos li .check svg { stroke: var(--rojo); }
+
+/* ============================================================================
+   BOTÓN / PÍLDORA DE WHATSAPP  — el llamado a la acción principal
+   ============================================================================ */
+.wa {
+  display: inline-flex;
+  align-items: center;
+  flex: none;              /* nunca se encoge: el número no se debe partir */
+  gap: 20px;
+  background: var(--wa);
+  color: #fff;
+  border-radius: 999px;
+  padding: 20px 40px 20px 24px;
+  z-index: 4;
+}
+.wa .icono {
+  flex: 0 0 62px; height: 62px;
+  border-radius: 50%;
+  background: #fff;
+  display: grid; place-items: center;
+}
+.wa .icono svg { width: 38px; height: 38px; fill: var(--wa); }
+.wa .texto { display: block; }
+.wa .texto .arriba {
+  display: block;
+  font-size: 19px; font-weight: 700; letter-spacing: .13em;
+  text-transform: uppercase; opacity: .95;
+}
+.wa .texto .numero {
+  display: block;
+  font-family: var(--head);
+  font-weight: 800;
+  font-size: 44px;
+  letter-spacing: .01em;
+  line-height: 1.05;
+  margin-top: 2px;
+  white-space: nowrap;
+}
+
+/* Variante blanca (para fondos de color). */
+.wa.blanca { background: #fff; color: var(--negro); }
+.wa.blanca .icono { background: var(--wa); }
+.wa.blanca .icono svg { fill: #fff; }
+
+/* Variante compacta, solo el número. */
+.wa.chica { padding: 14px 30px 14px 16px; gap: 14px; }
+.wa.chica .icono { flex-basis: 46px; height: 46px; }
+.wa.chica .icono svg { width: 28px; height: 28px; }
+.wa.chica .texto .numero { font-size: 34px; }
+
+/* ============================================================================
+   ETIQUETAS ANTES / DESPUÉS
+   ============================================================================ */
+.etiqueta {
+  position: absolute;
+  z-index: 3;
+  font-family: var(--head);
+  font-weight: 800;
+  font-size: 30px;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  padding: 12px 26px;
+  background: rgba(26,26,26,.88);
+  color: #fff;
+  backdrop-filter: blur(2px);
+}
+.etiqueta.despues { background: var(--rojo); }
+
+/* ============================================================================
+   PIE DE CONTACTO — barra inferior con teléfono, web y zona
+   ============================================================================ */
+.pie {
+  position: absolute;
+  left: 0; right: 0; bottom: 0;
+  z-index: 4;
+  background: var(--negro);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 28px;
+  padding: 28px 56px;
+  font-size: 24px;
+  font-weight: 500;
+}
+.pie .dato { display: flex; align-items: center; gap: 12px; white-space: nowrap; }
+.pie .dato svg { width: 26px; height: 26px; fill: var(--rojo); flex: none; }
+.pie .dato b { font-weight: 700; }
+
+/* ============================================================================
+   TIRA DE SERVICIOS
+   ============================================================================ */
+.servicios {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+  background: rgba(26,26,26,.9);
+  border: 2px solid rgba(255,255,255,.18);
+  border-radius: 999px;
+  padding: 18px 10px;
+  z-index: 4;
+  backdrop-filter: blur(4px);
+}
+.servicios span {
+  padding: 0 28px;
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+}
+.servicios span + span { border-left: 2px solid rgba(255,255,255,.2); }
+
+/* ============================================================================
+   MINIATURAS CIRCULARES (collage)
+   ============================================================================ */
+.circulo {
+  border-radius: 50%;
+  overflow: hidden;
+  border: 5px solid #fff;
+  box-shadow: 0 14px 40px rgba(0,0,0,.45);
+  flex: none;
+}
+.circulo img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+/* ============================================================================
+   AYUDAS DE DIAGRAMACIÓN
+   ============================================================================ */
+/* Zona segura de historias: Instagram/Facebook tapan ~250px arriba y ~340px
+   abajo con su propia interfaz. Agregá la clase `ver-guias` al <body> para
+   ver las líneas mientras editás; quitala antes de exportar.                 */
+body.ver-guias .zona-segura {
+  position: absolute; inset: 250px 60px 340px;
+  border: 2px dashed rgba(255,0,0,.75);
+  z-index: 99; pointer-events: none;
+}
+.zona-segura { display: none; }
+body.ver-guias .zona-segura { display: block; }
