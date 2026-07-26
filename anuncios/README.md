@@ -17,6 +17,7 @@ verlo y se exporta a PNG con un comando.
 | `05-muros-pintura` | 1080×1350 (4:5) | Pintura / muros | Antes → durante → después en tres bandas |
 | `06-bano-antes-despues` | 1080×1080 (1:1) | Remodelación de baños | Antes/después con corte diagonal vertical |
 | `07-escalera-metalica` | 1080×1350 (4:5) | Soldadura / escaleras | El proyecto estrella; sirve de portada del Reel de `escalera.mp4` |
+| `portada-facebook` | 1640×624 | — | Foto de portada de la Página de Facebook. Solo existe con el número principal (ver abajo) |
 
 Los formatos no son al azar: **4:5 es el que más pantalla ocupa** en el feed del celular,
 1:1 es el seguro para cualquier lado, y 9:16 es el de historias.
@@ -43,6 +44,10 @@ Esas son las que se suben a Facebook, Instagram o se ponen de estado de WhatsApp
 **Los dos juegos salen del mismo HTML.** No hay carpetas duplicadas: el script hace una copia
 temporal cambiando solo el número. Si cambiás una foto o un texto, con volver a exportar
 quedan actualizados los dos — no hay que acordarse de editar dos veces.
+
+**Piezas de un solo número.** Si una pieza no tiene sentido duplicada (la portada de Facebook,
+por ejemplo: la página es una sola y su botón apunta al número principal), se le pone
+`data-solo-principal="1"` en el `<body>` y el script la salta al generar el juego del socio.
 
 ## Editar un anuncio
 

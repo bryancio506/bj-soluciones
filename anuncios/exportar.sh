@@ -100,6 +100,13 @@ for juego in "${juegos[@]}"; do
       continue
     fi
 
+    # Piezas marcadas con data-solo-principal="1" (ej. la portada de Facebook)
+    # existen en una sola versión: no tiene sentido una portada por número.
+    if [ "$juego" = "socio" ] && grep -q 'data-solo-principal="1"' "$html"; then
+      echo "  – $carpeta — solo va con el número principal, se salta"
+      continue
+    fi
+
     if [ "$juego" = "socio" ]; then
       # Copia temporal en la MISMA carpeta, para que las rutas relativas
       # a ../_marca y ../../public sigan resolviendo igual.
