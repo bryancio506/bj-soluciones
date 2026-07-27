@@ -1,0 +1,186 @@
+{
+  "titulo": "Lecciones aprendidas — montaje de presencia digital para un contratista local (BJ Soluciones, Costa Rica)",
+  "fecha": "2026-07-26",
+  "contexto": {
+    "cliente": "Contratista de construcción en la GAM, Costa Rica. Dos socios, dos números de WhatsApp.",
+    "stack": "Sitio estático Vite + React (SPA sin backend), desplegado en Netlify. Contenido en JSON estáticos.",
+    "entregables": "Sitio web, 7 anuncios para redes + portada de Facebook (HTML exportado a PNG), plan de marketing, guía de arranque de Facebook.",
+    "presupuesto_de_pauta": "₡0 — todo orgánico. Esto condiciona casi todas las decisiones de abajo."
+  },
+  "como_usar_este_archivo": "Son los detalles que NO son obvios y que cambian el resultado en un servicio de este tipo. Lo obvio (poner logo, llenar la bio) no está acá a propósito. Cada lección trae por qué importa y cómo se detectó, para poder juzgar si aplica a otro caso.",
+  "advertencia": "Los ítems marcados volatilidad='ui_puede_cambiar' dependen de interfaces de Meta o Netlify, que cambian seguido. El fondo del asunto suele seguir siendo válido aunque el menú se llame distinto. Verificar antes de dar un dato como definitivo al cliente.",
+
+  "lecciones": [
+    {
+      "id": "fb-username",
+      "categoria": "facebook",
+      "volatilidad": "estable",
+      "leccion": "Una Página de Facebook recién creada queda con un link tipo facebook.com/profile.php?id=61592664595153. Hay que ponerle un nombre de usuario para que quede facebook.com/nombre.",
+      "por_que_importa": "Ese link no se puede dictar por teléfono, no cabe en una tarjeta de presentación y no comunica nada. Para un negocio local que se mueve por recomendación boca a boca, el link es material de venta, no un detalle técnico.",
+      "como_aplicar": "Página → Configuración → Información de la página → Nombre de usuario. Mínimo 5 caracteres, solo letras/números/puntos (nada de guiones ni guion bajo). Usar EL MISMO handle que en Instagram: quien los vio en una red los busca en la otra. Meta limita cada cuánto se puede cambiar, así que se elige bien de una. El link viejo sigue funcionando después.",
+      "como_se_detecto": "El cliente lo notó solo al compartir la página: 'no me gusta ese link tan raro'."
+    },
+    {
+      "id": "wa-boton-donde-sale",
+      "categoria": "whatsapp",
+      "volatilidad": "estable",
+      "leccion": "Poner un link wa.me en una publicación normal NO genera el botón verde de WhatsApp. El botón existe en tres lugares distintos y solo uno es gratis.",
+      "por_que_importa": "Es la confusión más común del cliente. Ve el botón 'Enviar mensaje' en anuncios de la competencia y asume que sale solo por pegar el link.",
+      "como_aplicar": "Botón de acción de la Página: sí, gratis, permanente, UN SOLO número. Publicación normal con link wa.me: no, sale como tarjeta de link. Anuncio o publicación promocionada con objetivo 'Mensajes': sí, botón nativo, requiere presupuesto. Historia: sticker de link, no botón.",
+      "como_se_detecto": "El cliente pasó capturas de anuncios de competidores con el botón visible. Al revisarlas se confirmó que todas eran anuncios pagados, no publicaciones orgánicas."
+    },
+    {
+      "id": "wa-un-link-un-numero",
+      "categoria": "whatsapp",
+      "volatilidad": "estable",
+      "leccion": "Un link wa.me apunta a un solo número. El botón de la Página también. Es límite de WhatsApp, no de Facebook. Con dos socios hay que decidir a cuál.",
+      "por_que_importa": "El cliente pide 'poner los dos números en el botón' y no se puede. Hay que dar una solución, no un no.",
+      "como_aplicar": "El número principal se queda con los CTA (botón de página, QR, botones del sitio). El segundo se lista como texto en la descripción de la página y en el pie del sitio. Para los estados de WhatsApp se generan DOS juegos de las mismas imágenes, cada uno con su número impreso, y cada socio sube el suyo.",
+      "como_se_detecto": "Pedido explícito del cliente de agregar el número del socio."
+    },
+    {
+      "id": "anuncios-dos-juegos-un-fuente",
+      "categoria": "proceso",
+      "volatilidad": "estable",
+      "leccion": "Cuando hay que entregar el mismo material con dos variantes (dos números, dos sucursales), NO duplicar carpetas. Generar las variantes desde una sola fuente.",
+      "por_que_importa": "Duplicar significa que el día que el cliente pide cambiar una foto hay que acordarse de editarla dos veces. A la tercera petición, los juegos ya divergieron y uno queda desactualizado sin que nadie se dé cuenta.",
+      "como_aplicar": "El diseño se escribe una vez con el valor principal. El script de exportación hace una copia temporal sustituyendo el dato y renderiza. Además, un marcador tipo data-solo-principal permite excluir piezas que no tienen sentido duplicadas (la portada de la página, por ejemplo: la página es una sola).",
+      "como_se_detecto": "El primer impulso fue crear carpetas socio/. Se descartó al pensar en el mantenimiento."
+    },
+    {
+      "id": "fb-portada-recortes",
+      "categoria": "formatos",
+      "volatilidad": "estable_pero_verificar",
+      "leccion": "La portada de Facebook se recorta distinto en computadora y en celular. Subir a 1640×624, pero en celular solo se ve la franja CENTRAL de ~1109 px de ancho. Además la foto de perfil se monta sobre la esquina inferior izquierda.",
+      "por_que_importa": "Casi todo el tráfico es celular. Una portada diseñada mirando la computadora pierde el logo o el número en el recorte, que es justo lo que se quería mostrar.",
+      "como_aplicar": "Composición centrada, todo lo crítico (logo, nombre, teléfono) dentro de la franja central. La esquina inferior izquierda se deja vacía. Los elementos decorativos sí pueden ir en las orillas: si se recortan no se pierde información. Conviene dibujar las dos zonas como guía visual en el archivo fuente y poder activarlas con una clase.",
+      "como_se_detecto": "Al revisar la primera versión con las guías dibujadas: la píldora del teléfono caía sobre la zona de la foto de perfil."
+    },
+    {
+      "id": "og-image-no-sirve-de-portada",
+      "categoria": "formatos",
+      "volatilidad": "estable",
+      "leccion": "La imagen de vista previa al compartir (og:image, 1200×630) NO sirve como portada de Facebook. Son proporciones distintas.",
+      "por_que_importa": "Es un atajo tentador porque la imagen ya existe y 'se ve parecida'. Queda recortada y descuidada, que es lo contrario de lo que un contratista quiere proyectar.",
+      "como_aplicar": "Cada ubicación tiene su medida. Hacer la pieza a medida cuesta poco si ya existe un sistema de diseño.",
+      "como_se_detecto": "El documento de estrategia original lo recomendaba; se corrigió al hacer la portada de verdad."
+    },
+    {
+      "id": "og-image-urls-absolutas",
+      "categoria": "web",
+      "volatilidad": "estable",
+      "leccion": "Las URLs de og:image y twitter:image tienen que ser absolutas (https://dominio/...). El Sharing Debugger de Facebook marca las relativas como inválidas.",
+      "por_que_importa": "Con URL relativa el link compartido sale sin imagen. Nadie lo nota hasta que el cliente comparte su propio sitio y ve una tarjeta gris.",
+      "como_aplicar": "Absolutas siempre, aunque el resto del sitio use rutas relativas."
+    },
+    {
+      "id": "meta-cachea-previews",
+      "categoria": "web",
+      "volatilidad": "estable",
+      "leccion": "Facebook y WhatsApp cachean la vista previa de un link la primera vez que alguien lo comparte. Cambiar el og: en el sitio no actualiza a quien ya lo compartió.",
+      "por_que_importa": "Después de corregir textos del sitio, el cliente comparte y sigue viendo lo viejo. Parece que el trabajo no se hizo.",
+      "como_aplicar": "Desplegar primero. Luego Facebook Sharing Debugger → pegar la URL → 'Scrape Again' (a veces dos veces). Eso suele arreglar Instagram y la mayoría de chats de WhatsApp porque comparten el crawler de Meta. Para un chat puntual de WhatsApp no hay herramienta: se resuelve en 24–48 h, o compartiendo con un parámetro al final (?v=2) para que lo trate como URL nueva."
+    },
+    {
+      "id": "aspect-ratio-min-height",
+      "categoria": "tecnico_css",
+      "volatilidad": "estable",
+      "leccion": "En CSS, aspect-ratio junto a un min-height en píxeles fijos y sin width explícito hace que el navegador deduzca el ANCHO a partir del alto. Un bloque con aspect-ratio:16/9 y min-height:360px se vuelve de 640px de ancho dentro de una columna de 326px.",
+      "por_que_importa": "Es la causa real de un desbordamiento horizontal en móvil que parecía cosa de otro elemento. Nadie sospecha del min-height.",
+      "como_aplicar": "Si se usa aspect-ratio, o se fija width:100%, o el min-height va en unidades relativas (clamp con vw). Nunca aspect-ratio + min-height en px sin ancho explícito.",
+      "como_se_detecto": "Midiendo qué elementos excedían el viewport, no leyendo el código. El bloque medía exactamente 640 = 360 × 16/9, y ese número delató la causa."
+    },
+    {
+      "id": "medir-body-scrollwidth",
+      "categoria": "tecnico_css",
+      "volatilidad": "estable",
+      "leccion": "overflow-x:hidden en html/body esconde el desbordamiento horizontal pero no lo arregla. Y hace que documentElement.scrollWidth mienta: reporta el ancho del viewport aunque el layout esté roto.",
+      "por_que_importa": "Se puede dar por resuelto un problema que sigue ahí. El síntoma que ve el usuario (contenido cortado a la derecha) persiste.",
+      "como_aplicar": "Medir document.body.scrollWidth a 390px de ancho, no documentElement.scrollWidth. Si body.scrollWidth > 390, hay layout roto. Y recorrer el DOM con getBoundingClientRect() para listar qué elementos se salen: eso señala al culpable directo en vez de adivinar.",
+      "como_se_detecto": "El repo ya tenía documentado un arreglo previo con overflow-x:hidden. Al medir de verdad, body.scrollWidth daba 672px en un viewport de 390."
+    },
+    {
+      "id": "netlify-auto-publish-trabado",
+      "categoria": "despliegue",
+      "volatilidad": "ui_puede_cambiar",
+      "leccion": "En Netlify el auto-publish se puede quedar detenido o un deploy queda bloqueado en producción. Los builds siguen corriendo y salen correctos, pero producción queda clavada en una versión vieja indefinidamente.",
+      "por_que_importa": "Se diagnostica mal como caché ('hay que darle chance'). No es cuestión de tiempo: puede quedarse así para siempre.",
+      "como_aplicar": "Diagnóstico rápido: comparar la URL propia del deploy (deploy-id--sitio.netlify.app) contra producción. Si el preview está bien y producción no, el build funciona y lo que falta es publicar. Solución: 'Publish deploy' en ese deploy, Y revisar el aviso de 'Auto publishing is stopped' o el candado, porque si no se reactiva vuelve a pasar en cada push.",
+      "como_se_detecto": "El cliente reportó que el preview se veía bien y producción no. Ese dato fue el que resolvió el diagnóstico."
+    },
+    {
+      "id": "verificar-en-vivo-no-en-local",
+      "categoria": "despliegue",
+      "volatilidad": "estable",
+      "leccion": "Antes de decirle al cliente 'ya está actualizado', verificar contra el sitio en vivo, no contra local ni contra el commit.",
+      "por_que_importa": "Push exitoso no significa publicado. En este caso el commit estaba en GitHub y producción servía una versión vieja.",
+      "como_aplicar": "Comparar el hash del bundle servido en producción contra el del build local, y buscar en vivo un string concreto que solo exista en la versión nueva. Es una verificación de 10 segundos que evita mandar un mensaje falso al cliente."
+    },
+    {
+      "id": "sin-pauta-numero-en-la-imagen",
+      "categoria": "contenido",
+      "volatilidad": "estable",
+      "leccion": "Con presupuesto de pauta en cero, no hay botón de contacto posible. La compensación es imprimir el teléfono grande y legible DENTRO de la imagen.",
+      "por_que_importa": "Es la diferencia entre un anuncio bonito y uno que genera llamadas. Sin botón, la imagen tiene que cargar el llamado a la acción.",
+      "como_aplicar": "Número grande, alto contraste, en una píldora con el verde de WhatsApp para que se lea como 'escríbame'. Y repetirlo como texto en el caption, porque el de la imagen no se puede copiar ni tocar.",
+      "nota": "El viejo límite de Meta de '20% de texto en la imagen' ya no se aplica como causa de rechazo. Igual conviene no saturar si en el futuro se va a pautar."
+    },
+    {
+      "id": "imagen-no-reemplaza-caption",
+      "categoria": "contenido",
+      "volatilidad": "estable",
+      "leccion": "El cliente asume que si la imagen ya tiene texto, el post va sin caption. Es al revés: sin caption el post casi no circula.",
+      "por_que_importa": "Facebook e Instagram priorizan lo que genera comentarios y guardados. Y los hashtags, que en Instagram son cómo te encuentra quien no te sigue, viven en el caption.",
+      "como_aplicar": "Dejar los copys escritos y listos para pegar, no solo las imágenes. Si se entrega imagen sin texto, el cliente la sube muda."
+    },
+    {
+      "id": "copy-asume-formato",
+      "categoria": "contenido",
+      "volatilidad": "estable",
+      "leccion": "Un copy escrito para carrusel no funciona en una imagen sola. Si el texto dice 'del antes al después', necesita varias fotos.",
+      "por_que_importa": "Es un error silencioso: el texto se lee bien aislado y solo choca cuando se publica.",
+      "como_aplicar": "Al mapear copys a piezas, verificar que el formato que asume el texto sea el que se va a subir. Solución que sirvió: publicar como carrusel con el anuncio de primero (frena el scroll) y las fotos reales del proyecto detrás (dan la prueba)."
+    },
+    {
+      "id": "cta-pedir-foto",
+      "categoria": "contenido",
+      "volatilidad": "estable",
+      "leccion": "Para servicios a medida, 'mándenos una foto del espacio' convierte mejor que 'cotice gratis'.",
+      "por_que_importa": "Preguntar un precio expone al cliente (teme que sea caro, teme regatear). Mandar una foto no compromete a nada. Y una vez que la mandó, la conversación ya empezó y el vendedor lleva la iniciativa.",
+      "como_aplicar": "Reservar 'cotización gratis' para las piezas de marca y usar el pedido de foto en las de servicio específico, para no repetir el mismo cierre en todo."
+    },
+    {
+      "id": "posicionamiento-contratista",
+      "categoria": "contenido",
+      "volatilidad": "estable",
+      "leccion": "Nombrar bien el oficio no es cosmético. 'Contratistas de construcción' y 'maestro de obras' describen el mismo trabajo pero posicionan distinto: uno es una empresa que toma un proyecto completo, el otro es un oficio individual.",
+      "por_que_importa": "Afecta qué tipo de cliente escribe y qué precio espera. El cliente lo pidió como corrección de fondo, no de redacción.",
+      "como_aplicar": "Corregirlo en TODAS las superficies a la vez: textos visibles, meta tags og/twitter, datos estructurados JSON-LD, categoría de la página de Facebook y documentos de estrategia. Si queda en una sola, reaparece. El tipo GeneralContractor de schema.org ya apuntaba a la lectura correcta."
+    },
+    {
+      "id": "sameas-json-ld",
+      "categoria": "web",
+      "volatilidad": "estable",
+      "leccion": "Cuando existan las redes, agregar sus URLs al campo sameAs del bloque JSON-LD del sitio.",
+      "por_que_importa": "Es lo que le dice a Google que el sitio web y la página de Facebook son el mismo negocio, en vez de dos entidades sueltas.",
+      "como_aplicar": "Depende del nombre de usuario definitivo, así que se hace después de crearlo. Conviene dejarlo anotado como pendiente explícito o se olvida."
+    },
+    {
+      "id": "html-como-herramienta-de-diseno",
+      "categoria": "proceso",
+      "volatilidad": "estable",
+      "leccion": "Para piezas gráficas repetitivas (anuncios, portadas, tarjetas), HTML + CSS exportado a PNG con Chromium headless funciona mejor que un editor gráfico.",
+      "por_que_importa": "El cliente puede cambiar una foto o un texto sin saber diseñar y sin licencias. Los colores salen del mismo config.json del sitio, así que la marca no deriva. Y las variantes se generan por script en vez de a mano.",
+      "como_aplicar": "chromium --headless=new --screenshot --window-size=ANCHOxALTO sobre un archivo local. El tamaño del lienzo se guarda como atributo en el propio HTML para que el script lo lea. Autoalojar las tipografías (woff2 local) en vez de usar Google Fonts por link: así el render es idéntico aunque no haya internet al momento de exportar.",
+      "nota": "Las fotos se referencian por ruta relativa a la carpeta del sitio, sin copiarlas. Agregar una foto al sitio la deja disponible para los anuncios automáticamente."
+    },
+    {
+      "id": "referencias-de-competencia",
+      "categoria": "proceso",
+      "volatilidad": "estable",
+      "leccion": "Pedirle al cliente capturas de anuncios de la competencia que le gusten es el mejor insumo de diseño, pero hay que leerlas críticamente.",
+      "por_que_importa": "Dan el formato y el registro visual que espera SU mercado. Pero también contienen cosas que el cliente cree que va a tener y no puede pagar (el botón de mensajes de los anuncios pagados).",
+      "como_aplicar": "Extraer de la referencia la estructura (proporción, jerarquía, dónde va el contacto) y separar explícitamente qué parte requiere presupuesto. Decirlo antes, no cuando pregunte por qué su anuncio no tiene botón."
+    }
+  ]
+}
