@@ -4,7 +4,7 @@ import Categorias from "./components/Categorias"
 import ProyectoCard from "./components/ProyectoCard"
 import Footer from "./components/Footer"
 import { IconWhatsApp } from "./icons"
-import { formatearTelefono, linkWhatsApp, numerosWhatsApp } from "./utils"
+import { formatearTelefono, linkWhatsApp } from "./utils"
 import Cotizaciones from "./Cotizaciones"
 
 function generarFavicon(letra, color) {
@@ -229,9 +229,6 @@ export default function App() {
 
   const wa = `https://wa.me/${config.contacto.whatsapp}?text=Hola%20BJ%20Soluciones%2C%20necesito%20una%20cotizaci%C3%B3n`
   const waQr = `https://api.qrserver.com/v1/create-qr-code/?size=300x300&margin=16&data=${encodeURIComponent(wa)}`
-  // Un link de WhatsApp solo puede apuntar a un número, así que los botones
-  // principales y el QR usan el primero; el resto se listan como alternativa.
-  const numerosWa = numerosWhatsApp(config.contacto)
 
   return (
     <div style={{ minHeight:"100vh", display:"flex", flexDirection:"column" }}>
@@ -496,21 +493,19 @@ export default function App() {
             </h3>
             <p style={{ margin:0, color:"rgba(255,255,255,0.78)", lineHeight:1.6, maxWidth:460 }}>
               Apunta tu cámara al código QR para abrir el chat directo. Si estás en celular, toca
-              cualquiera de los dos números y le contestamos.
+              el número de WhatsApp y le contestamos.
             </p>
             <div style={{ marginTop:14, display:"flex", gap:10, flexWrap:"wrap" }}>
-              {numerosWa.map((numero, i) => (
                 <a
-                  key={numero}
-                  href={linkWhatsApp(numero)}
+                  href={linkWhatsApp(config.contacto.whatsapp)}
                   target="_blank"
                   rel="noreferrer"
                   style={{
                     display:"inline-flex",
                     alignItems:"center",
                     gap:8,
-                    background: i === 0 ? config.colores.accent : "transparent",
-                    border: i === 0 ? "1px solid transparent" : "1px solid rgba(255,255,255,0.3)",
+                    background: config.colores.accent,
+                    border: "1px solid transparent",
                     color:"#fff",
                     padding:"0.7rem 1.2rem",
                     borderRadius:999,
@@ -519,9 +514,8 @@ export default function App() {
                     fontSize:"0.92rem",
                   }}
                 >
-                  <span aria-hidden="true">🟢</span> {formatearTelefono(numero)}
+                  <span aria-hidden="true">🟢</span> {formatearTelefono(config.contacto.whatsapp)}
                 </a>
-              ))}
             </div>
           </div>
 

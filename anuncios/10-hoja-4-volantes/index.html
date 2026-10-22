@@ -1,0 +1,155 @@
+<!doctype html>
+<!--
+  HOJA DE 4 VOLANTES — imposición 2x2 de 08-volante-servicios
+  ===========================================================================
+  Formato : tabloide vertical (doble carta), 11 x 17 pulgadas
+            El lienzo mide 1650 x 2550 px en pantalla y se exporta al DOBLE
+            (3300 x 5100 px) por el data-escala="2" del <body> → 300 DPI.
+
+  PARA QUÉ SIRVE
+  --------------
+  Es el volante de mano repetido cuatro veces en una sola hoja, para imprimir
+  UNA vez y sacar cuatro volantes con dos tijeretazos.
+
+  Por qué tabloide y no carta: el volante mide media carta (5.5 x 8.5"), y
+  cuatro de esos son exactamente una hoja tabloide (11 x 17"). Encajan sin
+  deformarse y sin desperdiciar papel. En carta no calzan — habría que
+  achicarlos y quedarían franjas blancas a los lados.
+
+  Si en la imprenta no hay tabloide: mandá esta misma hoja en carta con la
+  opción "ajustar a la página". Salen los cuatro volantes igual, solo que más
+  chiquitos (unos 9 x 14 cm cada uno, tamaño tarjeta grande).
+
+  CÓMO SE RECORTA
+  ---------------
+  1. Un corte vertical por la mitad de la hoja.
+  2. Un corte horizontal por la mitad.
+  3. Se recorta el bordecito blanco de afuera.
+  Las marcas negras de las orillas (las "cruces" de las esquinas y las rayitas
+  del centro) son las guías: se cortan sobre ellas y quedan los cuatro parejos.
+
+  NO SE EDITA ACÁ
+  ---------------
+  Los cuatro volantes NO son copias: son el mismo archivo
+  `08-volante-servicios/index.html` metido cuatro veces. Si cambiás una foto o
+  un texto allá, esta hoja queda actualizada sola con solo volver a exportar.
+  No copies y pegues el diseño acá adentro — se desincronizan y termina
+  imprimiéndose la versión vieja.
+
+  Lo único que se toca en este archivo es el margen de corte (--margen-x, abajo).
+
+  EXPORTAR: desde anuncios/ correr  ./exportar.sh 10-hoja-4-volantes
+-->
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <title>BJ Soluciones — Hoja de 4 volantes para recortar (tabloide)</title>
+  <link rel="stylesheet" href="../_marca/marca.css">
+  <style>
+    /* Lienzo: tabloide a 150 DPI. El <body> lo exporta al doble → 300 DPI. */
+    :root {
+      --w: 1650px; --h: 2550px;
+
+      /* Borde blanco alrededor del bloque de volantes: es donde caben las
+         marcas de corte. Se recorta y se bota.
+         Los dos márgenes NO son iguales, y tiene que ser así: el volante es más
+         alto que ancho, entonces para que el bloque de 2x2 conserve la misma
+         proporción de la hoja, el margen de arriba y abajo tiene que ser más
+         grande. Si se ponen iguales, queda una franja blanca entre las dos
+         filas. --margen-y sale de --margen-x dividido entre 825/1275. */
+      --margen-x: 30px;
+      --margen-y: 46.36px;
+
+      /* Tamaño real del volante 08 en su propio archivo. Si algún día cambia
+         de formato, hay que cambiarlo también acá. */
+      --vol-ancho: 825px;
+      --vol-alto: 1275px;
+    }
+
+    /* La hoja es blanca, no crema: es papel, no diseño. Lo crema lo pone cada
+       volante dentro de su recuadro. */
+    .lienzo { background: #fff; }
+
+    .bloque {
+      position: absolute;
+      inset: var(--margen-y) var(--margen-x);
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      grid-template-rows: repeat(2, 1fr);
+      gap: 0;                 /* pegados: un solo corte separa dos volantes */
+    }
+
+    /* Cada casilla recorta lo que sobre y adentro va el volante escalado.
+       El factor de escala sale de: (ancho de hoja − 2 márgenes) / 2 volantes,
+       dividido entre el ancho real del volante. Con --margen-x: 30px da 0.9636,
+       o sea que el volante impreso queda en 5.3 x 8.3" — casi media carta. */
+    .casilla { position: relative; overflow: hidden; }
+    .casilla iframe {
+      position: absolute; top: 0; left: 0;
+      width: var(--vol-ancho); height: var(--vol-alto);
+      border: 0;
+      transform-origin: top left;
+      transform: scale(calc((var(--w) - 2 * var(--margen-x)) / 2 / var(--vol-ancho)));
+    }
+
+    /* ---------- Marcas de corte ----------
+       Van en el borde blanco, nunca encima del volante. Se corta siguiendo la
+       línea que marcan. */
+    /* 2px acá son 4px impresos: una raya más fina se pierde en una fotocopia. */
+    .marca { position: absolute; background: var(--negro); z-index: 5; }
+
+    /* Rayitas del centro: marcan los dos cortes que parten la hoja en cuatro. */
+    .marca.centro-v { width: 2px; height: calc(var(--margen-y) - 10px); left: 50%; }
+    .marca.centro-v.arriba { top: 0; }
+    .marca.centro-v.abajo  { bottom: 0; }
+    .marca.centro-h { height: 2px; width: calc(var(--margen-x) - 10px); top: 50%; }
+    .marca.centro-h.izq { left: 0; }
+    .marca.centro-h.der { right: 0; }
+
+    /* Cruces de las esquinas: marcan hasta dónde recortar el borde. */
+    .esquina { position: absolute; width: var(--margen-x); height: var(--margen-y); z-index: 5; }
+    .esquina::before, .esquina::after { content: ""; position: absolute; background: var(--negro); }
+    .esquina::before { width: calc(var(--margen-x) - 10px); height: 2px; }
+    .esquina::after  { height: calc(var(--margen-y) - 10px); width: 2px; }
+
+    .esquina.si { top: 0; left: 0; }
+    .esquina.si::before { bottom: 0; left: 0; }
+    .esquina.si::after  { right: 0; top: 0; }
+
+    .esquina.sd { top: 0; right: 0; }
+    .esquina.sd::before { bottom: 0; right: 0; }
+    .esquina.sd::after  { left: 0; top: 0; }
+
+    .esquina.ii { bottom: 0; left: 0; }
+    .esquina.ii::before { top: 0; left: 0; }
+    .esquina.ii::after  { right: 0; bottom: 0; }
+
+    .esquina.id { bottom: 0; right: 0; }
+    .esquina.id::before { top: 0; right: 0; }
+    .esquina.id::after  { left: 0; bottom: 0; }
+  </style>
+</head>
+<body data-ancho="1650" data-alto="2550" data-escala="2">
+
+<div class="lienzo">
+
+  <div class="bloque">
+    <div class="casilla"><iframe src="../08-volante-servicios/index.html" scrolling="no" title="Volante 1"></iframe></div>
+    <div class="casilla"><iframe src="../08-volante-servicios/index.html" scrolling="no" title="Volante 2"></iframe></div>
+    <div class="casilla"><iframe src="../08-volante-servicios/index.html" scrolling="no" title="Volante 3"></iframe></div>
+    <div class="casilla"><iframe src="../08-volante-servicios/index.html" scrolling="no" title="Volante 4"></iframe></div>
+  </div>
+
+  <!-- Marcas de corte -->
+  <div class="marca centro-v arriba"></div>
+  <div class="marca centro-v abajo"></div>
+  <div class="marca centro-h izq"></div>
+  <div class="marca centro-h der"></div>
+  <div class="esquina si"></div>
+  <div class="esquina sd"></div>
+  <div class="esquina ii"></div>
+  <div class="esquina id"></div>
+
+</div>
+</body>
+</html>

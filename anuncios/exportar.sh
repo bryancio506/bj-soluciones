@@ -2,27 +2,19 @@
 # ============================================================================
 # Exporta los anuncios HTML a imágenes PNG listas para publicar.
 #
-#   ./exportar.sh                    → todos los anuncios, número principal
+#   ./exportar.sh                    → todos los anuncios
 #   ./exportar.sh 01-segunda-planta  → solo ese anuncio
-#   ./exportar.sh --socio            → todos, con el número del socio
-#   ./exportar.sh --ambos            → los dos juegos de una vez
-#   ./exportar.sh --ambos 04-story-soldadura   → un anuncio, los dos números
 #
 # Salidas:
-#   anuncios/salidas/<anuncio>.png          ← número principal
-#   anuncios/salidas/socio/<anuncio>.png    ← número del socio
-#
-# POR QUÉ NO HAY CARPETAS DUPLICADAS
-# ----------------------------------
-# El anuncio se escribe una sola vez con el número principal. Para el juego del
-# socio, el script hace una copia temporal del HTML cambiando solo el número,
-# la fotografía y la borra. Así, cuando cambiés un texto o una foto, los dos
-# juegos quedan actualizados — no hay que acordarse de editar dos veces.
-#
-# Si entra un tercer número, agregalo a la lista NUMEROS de abajo.
+#   anuncios/salidas/<anuncio>.png
 #
 # El tamaño de cada anuncio se lee del propio HTML, del atributo
 # <body data-ancho="1080" data-alto="1350">.
+#
+# Las piezas para IMPRIMIR (los volantes) llevan además data-escala="2": el HTML
+# se diseña a la mitad del tamaño para que se pueda editar cómodo, y se exporta
+# al doble para que salga a 300 DPI, que es lo que pide una imprenta. Las piezas
+# para redes no lo llevan y salen 1:1 como siempre.
 #
 # Requiere Chromium (o Chrome). Si el binario se llama distinto:
 #   CHROME=google-chrome ./exportar.sh
@@ -31,11 +23,6 @@ set -euo pipefail
 
 cd "$(dirname "$(readlink -f "$0")")"
 
-# --- Números de contacto -----------------------------------------------------
-# El primero es el que está escrito en los HTML; el resto son reemplazos.
-NUMERO_PRINCIPAL="6004-0817"
-NUMERO_SOCIO="6401-3395"
-
 CHROME="${CHROME:-chromium}"
 if ! command -v "$CHROME" >/dev/null 2>&1; then
   echo "No se encontró '$CHROME'. Instalá Chromium o corré: CHROME=<binario> ./exportar.sh" >&2
@@ -43,13 +30,10 @@ if ! command -v "$CHROME" >/dev/null 2>&1; then
 fi
 
 # --- Argumentos --------------------------------------------------------------
-juegos=("principal")
 carpetas=()
 for arg in "$@"; do
   case "$arg" in
-    --socio) juegos=("socio") ;;
-    --ambos) juegos=("principal" "socio") ;;
-    --*)     echo "Opción desconocida: $arg (usá --socio o --ambos)" >&2; exit 1 ;;
+    --*)     echo "Opción desconocida: $arg" >&2; exit 1 ;;
     *)       carpetas+=("${arg%/}") ;;
   esac
 done
@@ -66,59 +50,40 @@ fi
 
 # --- Render ------------------------------------------------------------------
 render() {  # render <archivo-html> <destino-png>
-  local html="$1" destino="$2" ancho alto
-  ancho=$(grep -o 'data-ancho="[0-9]*"' "$html" | head -1 | grep -o '[0-9]*')
-  alto=$(grep  -o 'data-alto="[0-9]*"'  "$html" | head -1 | grep -o '[0-9]*')
+  local html="$1" destino="$2" ancho alto escala
+  ancho=$(grep  -o 'data-ancho="[0-9]*"'    "$html" | head -1 | grep -o '[0-9]*')
+  alto=$(grep   -o 'data-alto="[0-9]*"'     "$html" | head -1 | grep -o '[0-9]*')
+  # `|| true`: los anuncios de redes NO llevan data-escala y grep saldría con
+  # error, que con `set -e` mataría el script entero.
+  escala=$(grep -o 'data-escala="[0-9.]*"'  "$html" | head -1 | grep -o '[0-9.]*' || true)
+  ancho="${ancho:-1080}"; alto="${alto:-1350}"; escala="${escala:-1}"
 
   "$CHROME" \
     --headless=new \
     --disable-gpu \
     --hide-scrollbars \
-    --force-device-scale-factor=1 \
+    --force-device-scale-factor="$escala" \
     --virtual-time-budget=8000 \
-    --window-size="${ancho:-1080},${alto:-1350}" \
+    --window-size="${ancho},${alto}" \
     --screenshot="$destino" \
     "file://$(pwd)/$html" >/dev/null 2>&1
 
-  echo "  ✓ $destino (${ancho:-1080}×${alto:-1350})"
+  if [ "$escala" = "1" ]; then
+    echo "  ✓ $destino (${ancho}×${alto})"
+  else
+    echo "  ✓ $destino (${ancho}×${alto} ×${escala} → $(( ancho * ${escala%.*} ))×$(( alto * ${escala%.*} )) px, 300 DPI)"
+  fi
 }
 
-for juego in "${juegos[@]}"; do
-  if [ "$juego" = "socio" ]; then
-    salida="salidas/socio"
-    echo "Juego del socio ($NUMERO_SOCIO):"
-  else
-    salida="salidas"
-    echo "Juego principal ($NUMERO_PRINCIPAL):"
+mkdir -p salidas
+for carpeta in "${carpetas[@]}"; do
+  html="$carpeta/index.html"
+  if [ ! -f "$html" ]; then
+    echo "  ✗ $carpeta — no tiene index.html, se salta" >&2
+    continue
   fi
-  mkdir -p "$salida"
 
-  for carpeta in "${carpetas[@]}"; do
-    html="$carpeta/index.html"
-    if [ ! -f "$html" ]; then
-      echo "  ✗ $carpeta — no tiene index.html, se salta" >&2
-      continue
-    fi
-
-    # Piezas marcadas con data-solo-principal="1" (ej. la portada de Facebook)
-    # existen en una sola versión: no tiene sentido una portada por número.
-    if [ "$juego" = "socio" ] && grep -q 'data-solo-principal="1"' "$html"; then
-      echo "  – $carpeta — solo va con el número principal, se salta"
-      continue
-    fi
-
-    if [ "$juego" = "socio" ]; then
-      # Copia temporal en la MISMA carpeta, para que las rutas relativas
-      # a ../_marca y ../../public sigan resolviendo igual.
-      tmp="$carpeta/.tmp-socio.html"
-      sed "s/${NUMERO_PRINCIPAL}/${NUMERO_SOCIO}/g" "$html" > "$tmp"
-      render "$tmp" "$salida/$carpeta.png"
-      rm -f "$tmp"
-    else
-      render "$html" "$salida/$carpeta.png"
-    fi
-  done
-  echo
+  render "$html" "salidas/$carpeta.png"
 done
 
 echo "Listo."

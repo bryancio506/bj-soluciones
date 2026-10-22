@@ -7,12 +7,6 @@ export function formatearTelefono(numero) {
   return `+506 ${local.slice(0, 4)}-${local.slice(4)}`
 }
 
-// Devuelve la lista de números de WhatsApp configurados, sin vacíos ni repetidos.
-// Hoy son dos (el principal y el del socio), pero soporta los que hagan falta.
-export function numerosWhatsApp(contacto) {
-  return [contacto.whatsapp, contacto.whatsapp2].filter(Boolean)
-}
-
 // Link de WhatsApp con mensaje ya escrito.
 export function linkWhatsApp(numero, mensaje = "Hola BJ Soluciones, necesito una cotización") {
   return `https://wa.me/${numero}?text=${encodeURIComponent(mensaje)}`

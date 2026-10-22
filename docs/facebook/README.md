@@ -6,9 +6,8 @@ existe en el repo.
 > **Esta guía no repite los datos del perfil.** El nombre, la categoría, la bio, la
 > descripción larga y el paso a paso de Instagram y Meta Business Suite están en
 > [`estrategia/01-creacion-perfiles.md`](../../estrategia/01-creacion-perfiles.md).
-> Acá está lo que ese documento no cubre: cómo funciona de verdad el botón de WhatsApp,
-> qué publicar los primeros días con los anuncios ya hechos, y qué hacer con el segundo
-> número.
+> Acá está lo que ese documento no cubre: cómo funciona de verdad el botón de WhatsApp
+> y qué publicar los primeros días con los anuncios ya hechos.
 
 ---
 
@@ -20,7 +19,6 @@ existe en el repo.
 | Fotos de 13 proyectos | `public/proyectos/` | Publicaciones y álbumes |
 | Video de la escalera | `public/proyectos/escalera.mp4` | Reel |
 | 7 anuncios armados | `anuncios/salidas/` | Publicaciones y estados |
-| Los mismos 7, con el número del socio | `anuncios/salidas/socio/` | Estados del socio |
 | Portada de Facebook (1640×624) | `anuncios/salidas/portada-facebook.png` | Foto de portada |
 | Sitio web | https://bj-soluciones.netlify.app/ | Campo "Sitio web" de la página |
 | Copys escritos | [`estrategia/04-copys-iniciales.md`](../../estrategia/04-copys-iniciales.md) | Texto de las publicaciones |
@@ -28,7 +26,7 @@ existe en el repo.
 Si la carpeta `anuncios/salidas/` no existe, se regenera con:
 
 ```bash
-cd anuncios && ./exportar.sh --ambos
+cd anuncios && ./exportar.sh
 ```
 
 ---
@@ -127,14 +125,6 @@ Amplía el punto 7 de `estrategia/01`.
 
 **El de Byron (6004-0817).** El botón admite uno solo, igual que un link de `wa.me` — es
 una limitación de WhatsApp, no de Facebook.
-
-El número del socio (**6401-3395**) va en:
-
-- La **descripción de la página**, como segunda línea de contacto.
-- Los **estados de WhatsApp del socio**, con el juego de anuncios de
-  `anuncios/salidas/socio/` (esos ya salen con su número impreso).
-
-Así los dos números circulan sin pelearse por el mismo botón.
 
 ## Paso 4 — La foto de portada
 
@@ -257,13 +247,8 @@ Después de estos cuatro, seguí el ritmo de
 
 ## Paso 6 — Los estados de WhatsApp
 
-Son dos juegos de las mismas siete imágenes, cambia solo el número impreso:
-
-- `anuncios/salidas/` → los sube **Byron** (sale 6004-0817)
-- `anuncios/salidas/socio/` → los sube **el socio** (sale 6401-3395)
-
-Conviene que **no suban el mismo el mismo día**: si los contactos comparten, ven la imagen
-repetida. Mejor alternar, o que cada uno arranque por un anuncio distinto.
+Las siete imágenes de `anuncios/salidas/` muestran el WhatsApp de Byron (6004-0817).
+Se pueden publicar también como estados de WhatsApp.
 
 ---
 
@@ -275,7 +260,6 @@ repetida. Mejor alternar, o que cada uno arranque por un anuncio distinto.
 - [ ] Portada subida = `anuncios/salidas/portada-facebook.png`
 - [ ] Sitio web `https://bj-soluciones.netlify.app/` en la información de la página
 - [ ] Botón de WhatsApp configurado con 6004-0817 y **probado desde otro teléfono**
-- [ ] Número del socio (6401-3395) agregado en la descripción
 - [ ] 4 publicaciones arriba antes de invitar gente
 - [ ] `03-servicios` publicado con el Copy A y **fijado** en la parte superior
 - [ ] Instagram y Meta Business Suite → seguir `estrategia/01`, secciones 2 y 3

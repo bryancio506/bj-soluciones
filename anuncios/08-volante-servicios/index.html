@@ -1,0 +1,367 @@
+<!doctype html>
+<!--
+  VOLANTE A — "Carta de servicios" (para ENTREGAR EN MANO)
+  ===========================================================================
+  Formato : media carta vertical, 5.5 x 8.5 pulgadas
+            El lienzo mide 825 x 1275 px en pantalla y se exporta al DOBLE
+            (1650 x 2550 px) gracias a data-escala="2" del <body>. Eso son
+            300 DPI reales: es lo que hay que llevarle a la imprenta.
+            De una hoja carta salen DOS volantes → sale a mitad de precio.
+
+  Este es el volante de MANO: se lee a un brazo de distancia, así que puede
+  llevar la secuencia de fotos, descripciones cortas y los QR. Para pegar en
+  postes está el otro (09-volante-poste), que se lee de lejos y trae colillas.
+
+  LA SECUENCIA ES EL ARGUMENTO
+  ----------------------------
+  El bloque de tres fotos (antes → durante → después de la cocina) es lo que
+  hace el trabajo de venta. Una foto de "después" sola no prueba nada — puede
+  ser de cualquiera. Las tres seguidas prueban que la obra la hicieron ellos.
+  Por eso van pegadas, del mismo tamaño y en ese orden.
+
+  CONTACTO
+  --------
+  El volante muestra el WhatsApp de Byron con su código QR.
+
+  QUÉ SE PUEDE CAMBIAR
+  --------------------
+  · La secuencia → los tres `src` de .secuencia. Tienen que ser del MISMO
+    proyecto y en orden antes → durante → después, o se pierde el argumento.
+    Si el encuadre queda mal, ajustá `object-position` (el primer valor mueve
+    horizontal: 30% hacia la izquierda, 70% hacia la derecha).
+  · El pie de foto rojo → .rotulo-obra. Que diga qué obra es y nada más.
+  · Los servicios → los <li> de .rejilla. Son SEIS y la rejilla está calibrada
+    para seis. Si ponés uno más se desacomoda; mejor cambiá el texto de uno.
+  · La descripción de cada servicio → que quepa en DOS líneas.
+
+  LOS QR
+  ------
+  Están en _marca/qr/, generado con `qrencode` (no dependen de
+  internet al exportar). Abre WhatsApp con el mensaje ya escrito.
+  Si cambia el número, hay que regenerar el QR:
+      qrencode -l M -s 14 -m 2 -o _marca/qr/qr-wa-<numero>.png \
+        "https://wa.me/506<numero>?text=Hola%2C%20vi%20su%20volante%20y%20quiero%20cotizar."
+  Y comprobar que se lee ANTES de mandar a imprimir:
+      zbarimg --raw salidas/08-volante-servicios.png
+
+  EXPORTAR: desde anuncios/ correr  ./exportar.sh 08-volante-servicios
+-->
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <title>BJ Soluciones — Volante de mano · Servicios (media carta)</title>
+  <link rel="stylesheet" href="../_marca/marca.css">
+  <style>
+    /* Lienzo: media carta a 150 DPI. El <body> lo exporta al doble → 300 DPI. */
+    :root { --w: 825px; --h: 1275px; }
+
+    .lienzo { background: var(--crema); color: var(--negro); }
+
+    /* ---------- Encabezado negro ---------- */
+    .cabeza {
+      position: absolute; left: 0; right: 0; top: 0; height: 126px; z-index: 4;
+      background: var(--negro);
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 34px;
+      color: #fff;
+    }
+    .cabeza .marca img { width: 74px; height: 74px; border-radius: 16px; }
+    .cabeza .marca .nombre { font-size: 33px; }
+    .cabeza .marca .slogan { font-size: 13px; margin-top: 5px; }
+
+    /* Sello de la esquina: la promesa que más vende en un volante. */
+    .promesa {
+      text-align: right; line-height: 1.15;
+      font-family: var(--head); font-weight: 800; text-transform: uppercase;
+    }
+    .promesa .grande { display: block; font-size: 26px; color: var(--rojo); }
+    .promesa .chica  { display: block; font-size: 14px; letter-spacing: .12em; opacity: .8; font-family: var(--body); margin-top: 5px; }
+
+    /* Cuña diagonal roja del logo, repetida como firma de marca. */
+    .cunia-cabeza {
+      position: absolute; top: 126px; left: -40px; width: 300px; height: 16px;
+      background: var(--rojo); transform: skewX(-38deg); z-index: 5;
+    }
+
+    /* ---------- Titular ---------- */
+    .bloque-titular {
+      position: absolute; left: 34px; right: 34px; top: 150px; z-index: 3;
+    }
+    .bloque-titular .antetitulo { font-size: 15px; letter-spacing: .2em; }
+    /* 42px es el tope: "DE PRINCIPIO A FIN" es la línea más larga y a más no
+       cabe de un renglón. */
+    .bloque-titular .titular { font-size: 42px; margin-top: 10px; line-height: .95; }
+    .bloque-titular .bajada {
+      font-size: 18px; margin-top: 12px; color: var(--gris); opacity: 1;
+    }
+
+    /* ---------- Secuencia antes / durante / después ---------- */
+    .secuencia {
+      position: absolute; left: 0; right: 0; top: 300px; height: 216px; z-index: 3;
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 3px;
+      background: var(--negro);   /* se ve como línea fina entre las fotos */
+    }
+    .secuencia figure { position: relative; overflow: hidden; }
+    .secuencia .etiqueta {
+      left: 0; bottom: 0; font-size: 15px; letter-spacing: .14em; padding: 7px 14px;
+    }
+    /* Pie rojo: dice de qué obra es la secuencia. Sin esto son tres fotos sueltas. */
+    .rotulo-obra {
+      position: absolute; left: 0; right: 0; top: 516px; height: 34px; z-index: 4;
+      background: var(--rojo); color: #fff;
+      display: flex; align-items: center; justify-content: center; gap: 10px;
+      font-size: 15px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase;
+    }
+
+    /* ---------- Rejilla de servicios ---------- */
+    /* Ocupa todo el espacio entre la secuencia y el pie. Las tarjetas se estiran
+       solas para llenarlo (grid-auto-rows: 1fr), así que si mañana un texto
+       queda más largo o más corto, la rejilla no deja huecos.                */
+    .cuerpo {
+      position: absolute; left: 0; right: 0; top: 550px; bottom: 262px; z-index: 3;
+      padding: 20px 34px 20px;
+      display: flex; flex-direction: column;
+    }
+
+    .rotulo-seccion {
+      display: flex; align-items: center; gap: 14px;
+      font-size: 15px; font-weight: 700; letter-spacing: .2em; text-transform: uppercase;
+      color: var(--rojo); margin-bottom: 14px;
+    }
+    .rotulo-seccion::after { content: ""; flex: 1; height: 3px; background: var(--negro); opacity: .12; }
+
+    .rejilla {
+      list-style: none; flex: 1;
+      display: grid;
+      /* minmax(0,1fr) y no 1fr: sin eso, un texto largo ensancha su columna y
+         la rejilla se sale del volante. */
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      grid-auto-rows: 1fr;
+      gap: 12px;
+    }
+    .rejilla li {
+      background: #fff;
+      border-left: 6px solid var(--rojo);
+      padding: 14px 14px 13px 16px;
+      display: flex; gap: 13px; align-items: center;
+      min-width: 0;
+    }
+    .rejilla li > div { min-width: 0; }
+    /* El ícono va en cuadro negro: se distingue del texto y sobrevive a una
+       fotocopia en blanco y negro, que es como se imprime un volante barato. */
+    .rejilla .ico {
+      flex: 0 0 46px; height: 46px; border-radius: 12px;
+      background: var(--negro); color: #fff;
+      display: grid; place-items: center;
+    }
+    .rejilla .ico svg { width: 27px; height: 27px; fill: none; stroke: currentColor; stroke-width: 1.9; stroke-linecap: round; stroke-linejoin: round; }
+    /* 20px es el tope: "CONSTRUCCIÓN" es la palabra más larga y a 21px ya no
+       cabe en la tarjeta (es una sola palabra, no puede partirse en dos líneas). */
+    .rejilla h3 {
+      font-family: var(--head); font-weight: 800; font-size: 20px;
+      text-transform: uppercase; letter-spacing: -.02em; line-height: 1.05;
+    }
+    .rejilla p { font-size: 15px; line-height: 1.3; margin-top: 5px; color: var(--gris); }
+
+    /* ---------- Pie de contacto ---------- */
+    .pie-volante {
+      position: absolute; left: 0; right: 0; bottom: 0; height: 262px; z-index: 4;
+      background: var(--negro); color: #fff;
+      padding: 18px 34px;
+      display: flex; flex-direction: column; align-items: center;
+    }
+    .pie-volante .llamado {
+      font-family: var(--head); font-weight: 800; font-size: 21px;
+      text-transform: uppercase; letter-spacing: -.01em; text-align: center;
+    }
+    .pie-volante .llamado em { color: var(--rojo); font-style: normal; }
+
+    /* Contacto único, centrado para lectura e impresión. */
+    .contactos {
+      display: flex; justify-content: center;
+      width: 100%; margin-top: 14px;
+    }
+    .contacto { display: flex; align-items: center; gap: 18px; min-width: 0; }
+    /* El QR va sobre blanco sí o sí: sobre el negro los lectores fallan.
+       116px a 300 DPI son casi 2 cm impresos — por debajo de eso, con la
+       cantidad de cuadritos que tiene este código, los celulares fallan. */
+    .caja-qr { background: #fff; padding: 8px; border-radius: 12px; flex: none; }
+    .caja-qr img { display: block; width: 116px; height: 116px; }
+
+    .contacto .datos-wa { min-width: 0; }
+    .contacto .rotulo-wa {
+      display: flex; align-items: center; gap: 7px;
+      font-size: 13px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase;
+      opacity: .85;
+    }
+    .contacto .rotulo-wa svg { width: 17px; height: 17px; fill: var(--wa); flex: none; }
+    .contacto .numero {
+      /* El contacto único permite un número más visible. */
+      font-family: var(--head); font-weight: 800; font-size: 36px;
+      line-height: 1.05; margin-top: 4px; white-space: nowrap;
+    }
+    .contacto .escanee {
+      font-size: 12px; font-weight: 700; letter-spacing: .1em;
+      text-transform: uppercase; color: var(--rojo); margin-top: 4px;
+    }
+
+    .linea-datos {
+      display: flex; flex-wrap: wrap; justify-content: center; gap: 6px 20px;
+      margin-top: auto; padding-top: 12px;
+      font-size: 14px; font-weight: 500;
+    }
+    .linea-datos .dato { display: flex; align-items: center; gap: 7px; white-space: nowrap; }
+    .linea-datos .dato svg { width: 16px; height: 16px; fill: var(--rojo); flex: none; }
+  </style>
+</head>
+<body data-ancho="825" data-alto="1275" data-escala="2">
+
+<div class="lienzo">
+
+  <!-- ---------- ENCABEZADO ---------- -->
+  <div class="cabeza">
+    <div class="marca">
+      <img src="../../public/logo.png" alt="Logo BJ Soluciones">
+      <div>
+        <div class="nombre">BJ Soluciones</div>
+        <div class="slogan">Contratistas de construcción</div>
+      </div>
+    </div>
+    <div class="promesa">
+      <span class="grande">Cotización gratis</span>
+      <span class="chica">Sin compromiso · A domicilio</span>
+    </div>
+  </div>
+  <div class="cunia-cabeza"></div>
+
+  <!-- ---------- TITULAR ---------- -->
+  <div class="bloque-titular">
+    <div class="antetitulo">Toda la GAM · Costa Rica</div>
+    <h1 class="titular">Su proyecto,<br>de principio a fin</h1>
+    <p class="bajada">Un solo equipo: obra, acabados y limpieza final. Sin subcontratar a nadie.</p>
+  </div>
+
+  <!-- ---------- SECUENCIA ANTES / DURANTE / DESPUÉS ---------- -->
+  <div class="secuencia">
+    <figure>
+      <img class="foto" style="object-position: 62% center" src="../../public/proyectos/remodelacion-07-antes.jpeg" alt="Cocina antes de la remodelación">
+      <figcaption class="etiqueta">Antes</figcaption>
+    </figure>
+    <figure>
+      <img class="foto" style="object-position: 56% center" src="../../public/proyectos/remodelacion-07-durante.jpeg" alt="Cocina durante la remodelación">
+      <figcaption class="etiqueta">Durante</figcaption>
+    </figure>
+    <figure>
+      <img class="foto" style="object-position: 58% center" src="../../public/proyectos/remodelacion-07-despues.jpeg" alt="Cocina terminada">
+      <figcaption class="etiqueta despues">Después</figcaption>
+    </figure>
+  </div>
+  <div class="rotulo-obra">Remodelación completa de cocina · obra real nuestra</div>
+
+  <!-- ---------- SERVICIOS ---------- -->
+  <div class="cuerpo">
+    <div class="rotulo-seccion">Lo que hacemos</div>
+
+    <ul class="rejilla">
+      <li>
+        <span class="ico"><!-- chispa de soldadura -->
+          <svg viewBox="0 0 24 24"><path d="M12 2.5v4M12 17.5v4M2.5 12h4M17.5 12h4M5.2 5.2l2.9 2.9M15.9 15.9l2.9 2.9M18.8 5.2l-2.9 2.9M8.1 15.9l-2.9 2.9"/><circle cx="12" cy="12" r="3.1"/></svg>
+        </span>
+        <div>
+          <h3>Soldadura</h3>
+          <p>Portones, escaleras, pasamanos y estructuras de acero.</p>
+        </div>
+      </li>
+
+      <li>
+        <span class="ico"><!-- casco de obra -->
+          <svg viewBox="0 0 24 24"><path d="M3 17.5h18"/><path d="M6 17.5v-4a6 6 0 0 1 12 0v4"/><path d="M10 7.2V4.6h4v2.6"/></svg>
+        </span>
+        <div>
+          <h3>Construcción</h3>
+          <p>Ampliaciones, segundas plantas y obra gris.</p>
+        </div>
+      </li>
+
+      <li>
+        <span class="ico"><!-- casa -->
+          <svg viewBox="0 0 24 24"><path d="M3 10.8 12 3.5l9 7.3"/><path d="M5.5 9.2V20.5h13V9.2"/><path d="M10 20.5v-5.6h4v5.6"/></svg>
+        </span>
+        <div>
+          <h3>Remodelación</h3>
+          <p>Baños, cocinas y oficinas: demolición y acabado final.</p>
+        </div>
+      </li>
+
+      <li>
+        <span class="ico"><!-- rodillo de pintura -->
+          <svg viewBox="0 0 24 24"><rect x="2.8" y="3.4" width="12" height="5.2" rx="1.6"/><path d="M14.8 6h3.7A1.7 1.7 0 0 1 20.2 7.7v2.6a1.7 1.7 0 0 1-1.7 1.7H11v2.6"/><rect x="8.9" y="14.6" width="4.2" height="6" rx="1.2"/></svg>
+        </span>
+        <div>
+          <h3>Pintura</h3>
+          <p>Interior y exterior, residencial y comercial.</p>
+        </div>
+      </li>
+
+      <li>
+        <span class="ico"><!-- enchape / azulejo -->
+          <svg viewBox="0 0 24 24"><rect x="3" y="3" width="7.6" height="7.6" rx="1"/><rect x="13.4" y="3" width="7.6" height="7.6" rx="1"/><rect x="3" y="13.4" width="7.6" height="7.6" rx="1"/><rect x="13.4" y="13.4" width="7.6" height="7.6" rx="1"/></svg>
+        </span>
+        <div>
+          <h3>Acabados</h3>
+          <p>Enchapes, porcelanato, cielos rasos y detalles finos.</p>
+        </div>
+      </li>
+
+      <li>
+        <span class="ico"><!-- cercha de techo (no repetir la casa de Remodelación) -->
+          <svg viewBox="0 0 24 24"><path d="M1.6 14.6 12 5.2l10.4 9.4"/><path d="M12 5.2v9.4"/><path d="M6.4 10.6 12 14.6l5.6-4"/><path d="M2.6 18.8h18.8"/></svg>
+        </span>
+        <div>
+          <h3>Techos</h3>
+          <p>Estructura y lámina a la medida, cambio o reparación.</p>
+        </div>
+      </li>
+    </ul>
+  </div>
+
+  <!-- ---------- PIE: WhatsApp y QR ---------- -->
+  <div class="pie-volante">
+    <div class="llamado">Escríbanos — precio <em>el mismo día</em></div>
+
+    <div class="contactos">
+      <div class="contacto">
+        <div class="caja-qr">
+          <img src="../_marca/qr/qr-wa-6004-0817.png" alt="Código QR de WhatsApp 6004-0817">
+        </div>
+        <div class="datos-wa">
+          <div class="rotulo-wa">
+            <svg viewBox="0 0 24 24"><path d="M17.47 14.38c-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.16-.17.2-.35.22-.64.08-.3-.15-1.26-.46-2.39-1.48-.88-.79-1.48-1.76-1.65-2.06-.17-.3-.02-.46.13-.61.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.03-.52-.07-.15-.67-1.61-.92-2.21-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.79.37-.27.3-1.04 1.02-1.04 2.48s1.07 2.87 1.21 3.07c.15.2 2.1 3.2 5.08 4.49.71.3 1.26.49 1.69.62.71.23 1.36.2 1.87.12.57-.09 1.76-.72 2-1.41.25-.7.25-1.29.18-1.42-.08-.12-.28-.2-.57-.35M12.05 21.79h-.01a9.87 9.87 0 0 1-5.03-1.38l-.36-.21-3.74.98 1-3.65-.24-.37a9.86 9.86 0 0 1-1.51-5.26c0-5.45 4.44-9.89 9.89-9.89 2.64 0 5.12 1.03 6.99 2.9a9.83 9.83 0 0 1 2.89 6.99c0 5.45-4.44 9.89-9.88 9.89m8.41-18.3A11.82 11.82 0 0 0 12.05 0C5.5 0 .16 5.34.16 11.89c0 2.1.55 4.14 1.59 5.95L.06 24l6.3-1.65a11.88 11.88 0 0 0 5.69 1.45c6.55 0 11.89-5.34 11.89-11.89 0-3.18-1.24-6.17-3.48-8.41"/></svg>
+            WhatsApp
+          </div>
+          <div class="numero">6004-0817</div>
+          <div class="escanee">Escanee el código</div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="linea-datos">
+      <span class="dato">
+        <svg viewBox="0 0 24 24"><path d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5z"/></svg>
+        Toda la GAM
+      </span>
+      <span class="dato">
+        <svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm1 10.6V6h-2v7.4l5.2 3.1 1-1.7-4.2-2.2z"/></svg>
+        Lun–Sáb 7am–5pm
+      </span>
+      <span class="dato">
+        <svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm6.9 6h-2.9a15.6 15.6 0 0 0-1.3-3.4A8 8 0 0 1 18.9 8zM12 4c.8 1.1 1.4 2.5 1.8 4h-3.6c.4-1.5 1-2.9 1.8-4zM4.3 14A8 8 0 0 1 4 12c0-.7.1-1.4.3-2h3.3a16.6 16.6 0 0 0 0 4H4.3zm.8 2H8a15.6 15.6 0 0 0 1.3 3.4A8 8 0 0 1 5.1 16zm2.9-8H5.1a8 8 0 0 1 4.2-3.4A15.6 15.6 0 0 0 8 8zm4 12c-.8-1.1-1.4-2.5-1.8-4h3.6c-.4 1.5-1 2.9-1.8 4zm2.2-6H9.8a14.6 14.6 0 0 1 0-4h4.4a14.6 14.6 0 0 1 0 4zm.5 5.4a15.6 15.6 0 0 0 1.3-3.4h2.9a8 8 0 0 1-4.2 3.4zm2-5.4a16.6 16.6 0 0 0 0-4h3.3c.2.6.3 1.3.3 2s-.1 1.4-.3 2h-3.3z"/></svg>
+        bj-soluciones.netlify.app
+      </span>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>

@@ -1,4 +1,4 @@
-import { formatearTelefono, linkWhatsApp, numerosWhatsApp } from "../utils"
+import { formatearTelefono, linkWhatsApp } from "../utils"
 
 const IconWa = () => (
   <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
@@ -7,8 +7,6 @@ const IconWa = () => (
 )
 
 export default function Footer({ config }) {
-  // Un link por cada número configurado (principal + socio).
-  const numeros = numerosWhatsApp(config.contacto)
   return (
     <footer style={{ background: config.colores.primary, color: "white", marginTop: "4rem" }}>
       <div style={{ height: 3, background: config.colores.accent }} />
@@ -19,12 +17,10 @@ export default function Footer({ config }) {
           {config.contacto.horario && <p style={{ fontSize: "0.8rem", color: "rgba(255,255,255,0.35)", marginTop: 2 }}>{config.contacto.horario}</p>}
         </div>
         <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
-          {numeros.map(numero => (
-            <a key={numero} href={linkWhatsApp(numero)} target="_blank" rel="noreferrer"
+            <a href={linkWhatsApp(config.contacto.whatsapp)} target="_blank" rel="noreferrer"
               style={{ display: "flex", alignItems: "center", gap: 7, color: "rgba(255,255,255,0.75)", textDecoration: "none", fontSize: "0.88rem" }}>
-              <IconWa /> {formatearTelefono(numero)}
+              <IconWa /> {formatearTelefono(config.contacto.whatsapp)}
             </a>
-          ))}
           {config.contacto.email && (
             <a href={`mailto:${config.contacto.email}`}
               style={{ color: "rgba(255,255,255,0.45)", textDecoration: "none", fontSize: "0.82rem" }}>

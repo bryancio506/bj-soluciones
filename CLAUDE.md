@@ -82,11 +82,9 @@ generated via `api.qrserver.com` pointing at a `wa.me` deep link). `config.conta
 string (country code + number, e.g. `50660040817`) used to build `https://wa.me/<number>?text=<encoded msg>`
 links.
 
-There are **two numbers**: the owner's (`contacto.whatsapp`) and a business partner's
-(`contacto.whatsapp2`). A `wa.me` link can only target one number, so the primary CTAs and the QR keep the
-first one; the second is listed as an alternative in the footer and in the "Contacto rápido" card.
-`src/utils.js` holds the shared helpers (`numerosWhatsApp` returns the configured numbers in order,
-`formatearTelefono` renders `50660040817` as `+506 6004-0817`, `linkWhatsApp` builds the deep link).
+The site uses one WhatsApp number (`contacto.whatsapp`) in every CTA, QR, footer link and
+quote. `src/utils.js` holds `formatearTelefono` (which renders `50660040817` as
+`+506 6004-0817`) and `linkWhatsApp` (which builds the deep link).
 
 **They are contratistas (contractors), not "maestros de obra".** The site, meta tags, JSON-LD and the
 `estrategia/` docs all say "contratistas de construcción" — don't reintroduce the old wording.
@@ -139,14 +137,34 @@ class name to the element and the breakpoint rule there.
 - `docs/` — brand assets and identity notes (`docs/marca.md`, `docs/branding/`). Rejected design proposals
   (business card concepts, ad mockups) were deliberately deleted once the client picked a direction; don't
   recreate them from git history without being asked.
-- `anuncios/` — 7 social-media ads built as standalone HTML "canvases" (one folder each, `index.html`),
-  exported to PNG with `anuncios/exportar.sh` via headless Chromium. `_marca/marca.css` holds the shared
-  design system (colors mirrored from `public/config.json`, self-hosted Syne/DM Sans in `_marca/fuentes/`);
-  the per-ad HTML only does layout. Photos are referenced by relative path into `public/proyectos/` — there
-  are **no copies**, so adding a photo to the site makes it available to the ads. `exportar.sh --ambos`
-  renders two sets (owner's number and the partner's) from the same HTML by swapping the number in a temp
-  copy — **don't create duplicate per-number folders.** `anuncios/salidas/` is gitignored (regenerable,
-  ~14 MB). Read `anuncios/README.md` before editing.
+- `anuncios/` — 7 social-media ads, a Facebook cover and 2 print flyers, each built as a standalone HTML
+  "canvas" (one folder, one `index.html`), exported to PNG with `anuncios/exportar.sh` via headless
+  Chromium. `_marca/marca.css` holds the shared design system (colors mirrored from `public/config.json`,
+  self-hosted Syne/DM Sans in `_marca/fuentes/`); the per-ad HTML only does layout. Photos are referenced
+  by relative path into `public/proyectos/` — there are **no copies**, so adding a photo to the site makes
+  it available to the ads. `exportar.sh` renders one set with Byron's WhatsApp number.
+  `anuncios/salidas/` is gitignored (regenerable, ~14 MB). Read `anuncios/README.md` before editing.
+
+  The canvas size comes from `<body data-ancho data-alto>`. Print pieces add `data-escala="2"`: they are
+  authored at 150 DPI so the CSS numbers stay in a human range, and Chromium renders them at
+  `--force-device-scale-factor=2` for a 300 DPI PNG. Social pieces omit the attribute and render 1:1 — the
+  `grep` that reads it must keep its `|| true`, or `set -e` kills the whole run on them.
+
+  The two flyers are **not two skins of one design** — they serve the two ways the client hands them out:
+  `08-volante-servicios` (media carta) is read at arm's length, so it carries per-service copy;
+  `09-volante-poste` (carta) is read from across the street, so it is light-background (cheap toner at
+  volume, survives sun), typographically much larger, and ends in a strip of nine tear-off tabs.
+
+  Both carry the same antes → durante → después sequence of one kitchen remodel
+  (`public/proyectos/remodelacion-07-*.jpeg`, supplied by the client mid-build). Keep it a *sequence* of
+  one project: a lone "después" shot proves nothing, the three in order prove they did the work.
+
+  Both flyers print the single WhatsApp number and its QR. The social ads and flyers all
+  use the same contact.
+
+  Flyer QR codes live in `_marca/qr/`, generated offline with `qrencode` (no `api.qrserver.com` runtime
+  dependency, unlike the website's QR). The phone number is part of the filename (`qr-wa-6004-0817.png`).
+  Verify with `zbarimg --raw <png>` after regenerating — it should decode the QR in the image.
 - `estrategia/` — a social-media marketing plan for the client (not code): 8 markdown docs (`00`–`07`) plus
   `plan-de-marketing-bj-soluciones.pdf`, a condensed 9-page executive version generated from an HTML file via
   headless Chromium (`chromium --headless=new --print-to-pdf=...`). If the plan's assumptions change

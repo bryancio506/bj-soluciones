@@ -2,7 +2,7 @@
   "titulo": "Lecciones aprendidas — montaje de presencia digital para un contratista local (BJ Soluciones, Costa Rica)",
   "fecha": "2026-07-26",
   "contexto": {
-    "cliente": "Contratista de construcción en la GAM, Costa Rica. Dos socios, dos números de WhatsApp.",
+    "cliente": "Contratista de construcción en la GAM, Costa Rica. Un número de WhatsApp para contacto comercial.",
     "stack": "Sitio estático Vite + React (SPA sin backend), desplegado en Netlify. Contenido en JSON estáticos.",
     "entregables": "Sitio web, 7 anuncios para redes + portada de Facebook (HTML exportado a PNG), plan de marketing, guía de arranque de Facebook.",
     "presupuesto_de_pauta": "₡0 — todo orgánico. Esto condiciona casi todas las decisiones de abajo."
@@ -28,24 +28,6 @@
       "por_que_importa": "Es la confusión más común del cliente. Ve el botón 'Enviar mensaje' en anuncios de la competencia y asume que sale solo por pegar el link.",
       "como_aplicar": "Botón de acción de la Página: sí, gratis, permanente, UN SOLO número. Publicación normal con link wa.me: no, sale como tarjeta de link. Anuncio o publicación promocionada con objetivo 'Mensajes': sí, botón nativo, requiere presupuesto. Historia: sticker de link, no botón.",
       "como_se_detecto": "El cliente pasó capturas de anuncios de competidores con el botón visible. Al revisarlas se confirmó que todas eran anuncios pagados, no publicaciones orgánicas."
-    },
-    {
-      "id": "wa-un-link-un-numero",
-      "categoria": "whatsapp",
-      "volatilidad": "estable",
-      "leccion": "Un link wa.me apunta a un solo número. El botón de la Página también. Es límite de WhatsApp, no de Facebook. Con dos socios hay que decidir a cuál.",
-      "por_que_importa": "El cliente pide 'poner los dos números en el botón' y no se puede. Hay que dar una solución, no un no.",
-      "como_aplicar": "El número principal se queda con los CTA (botón de página, QR, botones del sitio). El segundo se lista como texto en la descripción de la página y en el pie del sitio. Para los estados de WhatsApp se generan DOS juegos de las mismas imágenes, cada uno con su número impreso, y cada socio sube el suyo.",
-      "como_se_detecto": "Pedido explícito del cliente de agregar el número del socio."
-    },
-    {
-      "id": "anuncios-dos-juegos-un-fuente",
-      "categoria": "proceso",
-      "volatilidad": "estable",
-      "leccion": "Cuando hay que entregar el mismo material con dos variantes (dos números, dos sucursales), NO duplicar carpetas. Generar las variantes desde una sola fuente.",
-      "por_que_importa": "Duplicar significa que el día que el cliente pide cambiar una foto hay que acordarse de editarla dos veces. A la tercera petición, los juegos ya divergieron y uno queda desactualizado sin que nadie se dé cuenta.",
-      "como_aplicar": "El diseño se escribe una vez con el valor principal. El script de exportación hace una copia temporal sustituyendo el dato y renderiza. Además, un marcador tipo data-solo-principal permite excluir piezas que no tienen sentido duplicadas (la portada de la página, por ejemplo: la página es una sola).",
-      "como_se_detecto": "El primer impulso fue crear carpetas socio/. Se descartó al pensar en el mantenimiento."
     },
     {
       "id": "fb-portada-recortes",
@@ -170,7 +152,7 @@
       "categoria": "proceso",
       "volatilidad": "estable",
       "leccion": "Para piezas gráficas repetitivas (anuncios, portadas, tarjetas), HTML + CSS exportado a PNG con Chromium headless funciona mejor que un editor gráfico.",
-      "por_que_importa": "El cliente puede cambiar una foto o un texto sin saber diseñar y sin licencias. Los colores salen del mismo config.json del sitio, así que la marca no deriva. Y las variantes se generan por script en vez de a mano.",
+      "por_que_importa": "El cliente puede cambiar una foto o un texto sin saber diseñar y sin licencias. Los colores salen del mismo config.json del sitio, así que la marca no deriva. Las imágenes se generan por script en vez de a mano.",
       "como_aplicar": "chromium --headless=new --screenshot --window-size=ANCHOxALTO sobre un archivo local. El tamaño del lienzo se guarda como atributo en el propio HTML para que el script lo lea. Autoalojar las tipografías (woff2 local) en vez de usar Google Fonts por link: así el render es idéntico aunque no haya internet al momento de exportar.",
       "nota": "Las fotos se referencian por ruta relativa a la carpeta del sitio, sin copiarlas. Agregar una foto al sitio la deja disponible para los anuncios automáticamente."
     },
