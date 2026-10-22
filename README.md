@@ -1,5 +1,13 @@
 # Vitrina Digital CR — Template
 
+## Cotizaciones de BJ Soluciones
+
+La página `/cotizaciones` permite preparar cotizaciones comerciales para clientes de BJ Soluciones. Se pueden añadir materiales, mano de obra y otros servicios con cantidad, unidad y precio; la vista previa calcula subtotal, impuesto opcional y total en colones. El botón **Guardar PDF** abre la impresión del navegador: elegir **Guardar como PDF** y tamaño carta. El documento lleva el logo, colores y datos de contacto de `public/config.json`.
+
+Las cotizaciones se guardan solo en el almacenamiento local del navegador usado. No se sincronizan entre teléfonos o computadoras y se pierden si se borran los datos del sitio. El acceso pide una contraseña fija y se mantiene durante la sesión de la pestaña. Como la contraseña está en el código del cliente, **esta barrera no protege datos confidenciales**: quien inspeccione los archivos publicados puede encontrarla. Para seguridad real hace falta autenticación del lado del servidor. Es una cotización comercial, no una factura electrónica.
+
+Para probarla localmente: `npm run dev` y abrir `http://localhost:5173/cotizaciones`.
+
 Template reutilizable para catálogos de tiendas. Para cada cliente nuevo:
 
 ## Pasos para nuevo cliente

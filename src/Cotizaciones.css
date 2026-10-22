@@ -1,0 +1,155 @@
+@font-face { font-family: "BJ Syne"; src: url("/fonts/syne.woff2") format("woff2"); font-weight: 400 800; font-display: swap; }
+@font-face { font-family: "BJ DM Sans"; src: url("/fonts/dmsans.woff2") format("woff2"); font-weight: 100 1000; font-display: swap; }
+
+.quotes-page { min-height: 100vh; background: #f2f0ed; color: #1a1a1a; font-family: "BJ DM Sans", sans-serif; }
+.quotes-page button, .quotes-page input, .quotes-page select, .quotes-page textarea { font: inherit; }
+.quotes-page button { cursor: pointer; }
+.quotes-topbar { min-height: 80px; padding: 13px max(24px, calc((100vw - 1440px) / 2)); display: flex; justify-content: space-between; align-items: center; background: var(--quote-dark); border-top: 4px solid var(--quote-accent); color: #fff; }
+.quotes-brand { display: flex; align-items: center; gap: 12px; color: #fff; text-decoration: none; }
+.quotes-brand img { width: 48px; height: 48px; object-fit: contain; border-radius: 10px; }
+.quotes-brand span, .quote-logo span { display: flex; flex-direction: column; }
+.quotes-brand strong { font: 800 20px/1.1 "BJ Syne", sans-serif; }
+.quotes-brand small { color: #aaa; font-size: 11px; letter-spacing: .03em; margin-top: 4px; }
+.quotes-back { color: #ddd; text-decoration: none; font-size: 13px; }
+.quotes-back:hover { color: #fff; }
+.quotes-top-actions { display: flex; align-items: center; gap: 18px; }
+.quotes-top-actions button { color: #fff; border: 1px solid #ffffff55; background: transparent; border-radius: 6px; padding: 7px 10px; font-size: 12px; }
+.quotes-top-actions button:hover { background: #ffffff18; }
+.quotes-login { display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 100vh; background: #f2f0ed; padding: 24px; font-family: "BJ DM Sans", sans-serif; }
+.quotes-login-back { position: absolute; top: 25px; left: 28px; color: #514c48; text-decoration: none; font-size: 13px; }
+.quotes-login-card { width: min(100%, 420px); background: #fff; border-top: 5px solid var(--quote-accent); border-radius: 12px; box-shadow: 0 14px 36px #1a1a1a1c; padding: 35px; display: flex; flex-direction: column; }
+.quotes-login-card img { width: 62px; height: 62px; object-fit: contain; margin-bottom: 24px; }
+.quotes-login-card h1 { font: 800 32px/1.1 "BJ Syne", sans-serif; margin: 8px 0; }
+.quotes-login-card p { color: #6f6964; font-size: 13px; margin-bottom: 27px; }
+.quotes-login-card label { font-size: 12px; font-weight: 800; color: #4e4945; }
+.quotes-login-card input { width: 100%; margin: 7px 0 16px; border: 1px solid #d8d2cc; border-radius: 7px; padding: 11px; outline: none; font-size: 15px; }
+.quotes-login-card input:focus { border-color: var(--quote-accent); box-shadow: 0 0 0 3px #d72b2b19; }
+.quotes-login-card button { border: 0; border-radius: 7px; background: var(--quote-accent); color: #fff; padding: 12px; font-size: 14px; font-weight: 800; cursor: pointer; }
+.quotes-login-error { color: #a12621; font-size: 12px; margin: -5px 0 13px; }
+.quotes-shell { max-width: 1488px; margin: auto; padding: 38px 24px 72px; }
+.quotes-intro { display: flex; align-items: end; justify-content: space-between; gap: 20px; margin-bottom: 28px; }
+.quotes-eyebrow { color: var(--quote-accent); font-size: 11px; font-weight: 800; letter-spacing: .15em; }
+.quotes-intro h1 { font: 800 clamp(30px, 4vw, 44px)/1.05 "BJ Syne", sans-serif; margin: 7px 0; }
+.quotes-intro p { color: #68625d; font-size: 14px; }
+.quotes-new, .quotes-print { border: none; border-radius: 8px; background: var(--quote-accent); color: #fff; padding: 12px 17px; font-weight: 700 !important; white-space: nowrap; box-shadow: 0 5px 12px #d72b2b22; }
+.quotes-new:hover, .quotes-print:hover { filter: brightness(.91); }
+.quotes-layout { display: grid; grid-template-columns: minmax(350px, 540px) minmax(0, 1fr); gap: 27px; align-items: start; }
+.quotes-editor { display: flex; flex-direction: column; gap: 16px; }
+.quotes-card { border: 1px solid #e0dbd6; background: #fff; border-radius: 14px; box-shadow: 0 5px 17px #1a1a1a08; padding: 24px; }
+.quotes-section-title { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; margin-bottom: 19px; padding-bottom: 13px; border-bottom: 1px solid #eae6e1; }
+.quotes-section-title h2 { font: 800 17px/1.2 "BJ Syne", sans-serif; }
+.quotes-section-title span { font-size: 11px; color: #827b75; text-align: right; }
+.quotes-card label { display: block; color: #59534e; font-size: 12px; font-weight: 700; }
+.quotes-card label b { color: var(--quote-accent); }
+.quotes-card input, .quotes-card select, .quotes-card textarea, .quotes-library select { display: block; width: 100%; min-width: 0; margin-top: 6px; border: 1px solid #d8d2cc; border-radius: 7px; background: #fff; color: #1a1a1a; padding: 10px 11px; outline: none; font-size: 13px; font-weight: 500; }
+.quotes-card input:focus, .quotes-card select:focus, .quotes-card textarea:focus { border-color: var(--quote-accent); box-shadow: 0 0 0 3px #d72b2b19; }
+.quotes-card textarea { resize: vertical; line-height: 1.5; }
+.quotes-card textarea + label { margin-top: 15px; }
+.quotes-fields { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+.quotes-fields label:nth-child(5), .quotes-fields label:nth-child(6) { grid-column: auto; }
+.quotes-link-danger { display: block; border: 0; background: none; color: #a13b35; margin-top: 12px; padding: 0; font-size: 12px !important; }
+.quotes-help { color: #817a73; font-size: 12px; margin: -6px 0 16px; }
+.quotes-lines { display: flex; flex-direction: column; gap: 12px; }
+.quotes-line { border: 1px solid #e4ded8; background: #faf9f7; padding: 15px; border-radius: 9px; }
+.quotes-line-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 13px; }
+.quotes-line-head strong { font: 800 12px "BJ Syne", sans-serif; }
+.quotes-line-head button { border: 0; background: none; color: #a13b35; font-size: 11px; }
+.quotes-line-grid { display: grid; grid-template-columns: 1fr 1.2fr 1.4fr; gap: 10px; margin-top: 12px; }
+.quotes-line-total { display: flex; justify-content: end; gap: 12px; margin-top: 12px; color: #827b75; font-size: 12px; }
+.quotes-line-total strong { color: #252220; }
+.quotes-add { width: 100%; margin-top: 12px; padding: 11px; background: #fff; color: var(--quote-accent); border: 1px dashed var(--quote-accent); border-radius: 8px; font-size: 12px !important; font-weight: 800 !important; }
+.quotes-add:hover { background: #fff5f4; }
+.quotes-tax { display: flex; align-items: end; gap: 17px; margin-top: 18px; padding-top: 17px; border-top: 1px solid #eae6e1; }
+.quotes-tax label { flex: 0 0 145px; }
+.quotes-tax p { color: #817a73; font-size: 11px; line-height: 1.4; }
+.quotes-card > label + label { margin-top: 15px; }
+.quotes-preview-column { min-width: 0; position: sticky; top: 18px; }
+.quotes-preview-toolbar { display: flex; justify-content: space-between; align-items: center; gap: 16px; margin-bottom: 13px; }
+.quotes-preview-toolbar div { display: flex; flex-direction: column; }
+.quotes-preview-toolbar strong { font: 800 15px "BJ Syne", sans-serif; }
+.quotes-preview-toolbar span { color: #817a73; font-size: 11px; }
+.quotes-error { margin-bottom: 13px; padding: 10px 12px; background: #fff1ef; color: #a12621; border-left: 3px solid var(--quote-accent); font-size: 12px; }
+.quotes-print-hint { margin-top: 11px; color: #817a73; font-size: 11px; text-align: center; }
+
+.quote-sheet { width: 100%; background: #fff; box-shadow: 0 12px 34px #1a1a1a21; border-radius: 3px; overflow: hidden; min-height: 780px; }
+.quote-red-rule { height: 8px; background: var(--quote-accent); }
+.quote-sheet-inner { padding: clamp(22px, 4vw, 42px); }
+.quote-document-header { display: flex; justify-content: space-between; align-items: center; gap: 12px; }
+.quote-logo { display: flex; align-items: center; gap: 12px; }
+.quote-logo img { width: 54px; height: 54px; object-fit: contain; border-radius: 9px; }
+.quote-logo strong { font: 800 19px/1.05 "BJ Syne", sans-serif; }
+.quote-logo small { font-size: 9px; color: #756f6b; margin-top: 5px; }
+.quote-document-tag { padding: 8px 12px; border: 1px solid #d72b2b55; color: var(--quote-accent); font-size: 10px; font-weight: 800; letter-spacing: .13em; }
+.quote-heading { display: flex; justify-content: space-between; gap: 16px; margin: 43px 0 27px; }
+.quote-kicker { color: var(--quote-accent); font-size: 9px; font-weight: 800; letter-spacing: .15em; }
+.quote-heading h2 { font: 800 clamp(22px, 2.7vw, 31px)/1.12 "BJ Syne", sans-serif; max-width: 420px; margin: 8px 0; overflow-wrap: anywhere; }
+.quote-heading p { color: #756f6b; font-size: 11px; }
+.quote-id { display: flex; flex-direction: column; align-items: end; text-align: right; flex: 0 0 auto; font-size: 11px; }
+.quote-id strong { font-size: 13px; }
+.quote-id span { color: #756f6b; margin-top: 5px; }
+.quote-meta { display: grid; grid-template-columns: 1.6fr 1fr; gap: 20px; padding: 17px 0; border-top: 1px solid #e5e0db; border-bottom: 1px solid #e5e0db; margin-bottom: 28px; }
+.quote-meta > div { display: flex; flex-direction: column; }
+.quote-meta span { font-size: 9px; color: #928a83; font-weight: 800; letter-spacing: .1em; }
+.quote-meta strong { font-size: 13px; margin-top: 5px; overflow-wrap: anywhere; }
+.quote-meta small { font-size: 10px; color: #756f6b; margin-top: 3px; }
+.quote-table { width: 100%; border-collapse: collapse; table-layout: fixed; }
+.quote-table th { background: var(--quote-dark); color: #fff; text-align: right; padding: 11px 8px; font-size: 9px; letter-spacing: .04em; }
+.quote-table th:first-child, .quote-table td:first-child { text-align: left; width: 41%; }
+.quote-table th:nth-child(2), .quote-table td:nth-child(2) { width: 10%; }
+.quote-table th:nth-child(3), .quote-table td:nth-child(3) { width: 13%; }
+.quote-table th:nth-child(4), .quote-table td:nth-child(4) { width: 18%; }
+.quote-table th:nth-child(5), .quote-table td:nth-child(5) { width: 18%; }
+.quote-table td { padding: 12px 8px; border-bottom: 1px solid #ebe7e2; font-size: 10px; text-align: right; vertical-align: top; overflow-wrap: anywhere; }
+.quote-table td:first-child { font-weight: 700; }
+.quote-table tbody tr:nth-child(even) { background: #fbfaf9; }
+.quote-table .quote-placeholder { width: 100%; text-align: center !important; color: #aaa; font-weight: 400 !important; padding: 25px 8px; }
+.quote-totals { width: min(280px, 100%); margin: 19px 0 0 auto; }
+.quote-totals > div { display: flex; justify-content: space-between; gap: 15px; margin-bottom: 7px; font-size: 11px; }
+.quote-totals span { color: #756f6b; }
+.quote-totals .quote-grand-total { align-items: center; margin-top: 10px; padding: 13px 0; border-top: 2px solid var(--quote-accent); }
+.quote-grand-total span { color: #1a1a1a; font-size: 10px; font-weight: 800; }
+.quote-grand-total strong { color: var(--quote-accent); font: 800 20px "BJ Syne", sans-serif; }
+.quote-note { margin-top: 22px; break-inside: avoid; }
+.quote-note h3 { font-size: 9px; font-weight: 800; letter-spacing: .13em; color: var(--quote-accent); margin-bottom: 7px; }
+.quote-note p { font-size: 10px; white-space: pre-wrap; line-height: 1.5; color: #504b47; }
+.quote-footer { display: flex; justify-content: space-between; gap: 20px; margin-top: 45px; padding: 19px 0; border-top: 1px solid #e5e0db; }
+.quote-footer > div { display: flex; flex-direction: column; }
+.quote-footer > div:last-child { text-align: right; }
+.quote-footer strong { font: 800 11px "BJ Syne", sans-serif; }
+.quote-footer span { font-size: 9px; color: #756f6b; margin-top: 5px; }
+.quote-disclaimer { border-top: 1px solid #ebe7e2; padding-top: 12px; font-size: 8px; color: #938c86; }
+
+@media (max-width: 1040px) { .quotes-layout { grid-template-columns: 1fr; } .quotes-preview-column { position: static; } .quote-sheet { max-width: 750px; margin: auto; } }
+@media (max-width: 600px) { .quotes-shell { padding: 25px 14px 55px; } .quotes-topbar { padding: 12px 15px; } .quotes-brand strong { font-size: 15px; } .quotes-brand small { font-size: 9px; } .quotes-back { font-size: 11px; } .quotes-top-actions { gap: 8px; } .quotes-top-actions button { padding: 5px 7px; font-size: 10px; } .quotes-login-card { padding: 26px; } .quotes-intro { align-items: start; flex-direction: column; } .quotes-card { padding: 18px; } .quotes-fields { grid-template-columns: 1fr; } .quotes-line-grid { grid-template-columns: 1fr 1fr; } .quotes-line-grid label:last-child { grid-column: 1 / -1; } .quotes-preview-toolbar { align-items: start; } .quotes-preview-toolbar span { display: none; } .quote-sheet-inner { padding: 19px 14px; } .quote-heading { margin-top: 27px; flex-direction: column; } .quote-id { align-items: start; text-align: left; } .quote-table th, .quote-table td { padding: 8px 3px; font-size: 8px; } .quote-logo strong { font-size: 15px; } .quote-logo small { font-size: 8px; } .quote-logo img { width: 40px; height: 40px; } .quote-document-tag { font-size: 8px; padding: 6px; } }
+
+@media screen and (max-width: 600px) {
+  .quote-heading h2 { font-size: 25px; }
+  .quote-heading p, .quote-id, .quote-meta strong, .quote-meta small { font-size: 12px; }
+  .quote-table, .quote-table tbody, .quote-table tr, .quote-table td { display: block; width: 100% !important; }
+  .quote-table thead { display: none; }
+  .quote-table tr { border: 1px solid #e7e1dc; border-left: 3px solid var(--quote-accent); border-radius: 5px; margin-bottom: 10px; padding: 8px 11px; background: #fff !important; }
+  .quote-table td { display: flex; justify-content: space-between; gap: 12px; border: 0; padding: 5px 0; text-align: right; font-size: 12px; line-height: 1.4; }
+  .quote-table td::before { content: attr(data-label); color: #847c76; font-weight: 500; text-align: left; flex: 0 0 105px; }
+  .quote-table td:first-child { font-size: 13px; font-weight: 800; text-align: right; }
+  .quote-table .quote-placeholder { display: block; font-size: 12px; text-align: center !important; padding: 20px 4px; }
+  .quote-table .quote-placeholder::before { display: none; }
+  .quote-totals { width: 100%; }
+  .quote-totals > div { font-size: 12px; }
+  .quote-note h3 { font-size: 10px; }
+  .quote-note p { font-size: 12px; }
+  .quote-footer { margin-top: 30px; }
+  .quote-footer strong { font-size: 11px; }
+  .quote-footer span, .quote-disclaimer { font-size: 10px; }
+}
+
+@page { size: letter; margin: 0; }
+@media print {
+  html, body, #root { width: 100%; margin: 0 !important; padding: 0 !important; background: white !important; overflow: visible !important; }
+  .quotes-page { background: white !important; min-height: 0; print-color-adjust: exact; -webkit-print-color-adjust: exact; }
+  .quotes-topbar, .quotes-intro, .quotes-editor, .quotes-preview-toolbar, .quotes-print-hint, .quotes-error { display: none !important; }
+  .quotes-shell, .quotes-layout, .quotes-preview-column { display: block !important; padding: 0 !important; margin: 0 !important; width: 100% !important; max-width: none !important; }
+  .quote-sheet { width: 8.5in !important; max-width: none !important; min-height: 11in; margin: 0 !important; border: 0 !important; box-shadow: none !important; overflow: visible !important; }
+  .quote-sheet-inner { padding: .47in .55in .4in !important; }
+  .quote-heading h2 { font-size: 29px !important; }
+  .quote-table tr, .quote-meta, .quote-totals, .quote-footer { break-inside: avoid; }
+}

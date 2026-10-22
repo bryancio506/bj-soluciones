@@ -5,6 +5,7 @@ import ProyectoCard from "./components/ProyectoCard"
 import Footer from "./components/Footer"
 import { IconWhatsApp } from "./icons"
 import { formatearTelefono, linkWhatsApp, numerosWhatsApp } from "./utils"
+import Cotizaciones from "./Cotizaciones"
 
 function generarFavicon(letra, color) {
   const c = document.createElement("canvas")
@@ -211,6 +212,10 @@ export default function App() {
       Cargando...
     </div>
   )
+
+  if (window.location.pathname.replace(/\/$/, "") === "/cotizaciones") {
+    return <Cotizaciones config={config} />
+  }
 
   const filtrados = proyectos.filter(p => {
     const cat = catActiva === "Todos" || p.categoria === catActiva

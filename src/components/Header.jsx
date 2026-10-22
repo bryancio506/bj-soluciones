@@ -65,6 +65,11 @@ export default function Header({ config }) {
           </div>
         </div>
 
+        <nav aria-label="Menú principal" style={{ display: "flex", alignItems: "center", gap: 18, flexWrap: "wrap" }}>
+          <a href="/#proyectos" style={{ color: "#fff", textDecoration: "none", fontSize: "0.86rem", fontWeight: 700 }}>Proyectos</a>
+          <a href="/cotizaciones" style={{ color: "#fff", textDecoration: "none", fontSize: "0.86rem", fontWeight: 700, borderBottom: `2px solid ${config.colores.accent}`, paddingBottom: 3 }}>Cotizaciones</a>
+        </nav>
+
         {/* Contacto */}
         <div style={{ display: "flex", flexWrap: "wrap", gap: "0.5rem" }}>
           {pill(<IconWa />, "WhatsApp", wa)}
